@@ -1,4 +1,13 @@
-body {
-	background-color: black;
-	color: white;
-}
+/* 1. helpers */
+
+/* 2. vendor */
+@import 'vendor/normalize';
+
+/* 3. base */
+
+/* 4. layout */
+
+/* 5. components */
+@import 'components/button';
+
+/* 6. pages */
