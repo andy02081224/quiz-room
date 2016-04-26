@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 import Utils from '../utils/utils';
 
 /* Components */
-import ShortUIDViewer from '../components/ShortUIDViewer/ShortUIDViewer.jsx';
+import RoomIdViewer from '../components/RoomIdViewer/RoomIdViewer.jsx';
 import PlayerList from '../components/PlayerList/PlayerList.jsx';
 
 /* Styles */
@@ -13,7 +13,7 @@ import '../../styles/app.scss';
 
 class MasterPage extends React.Component {
 	static defaultProps = {
-		UID: Utils.generateShortUID()
+		roomId: Utils.generateShortUID()
 	};
 
 	constructor(props) {
@@ -26,7 +26,7 @@ class MasterPage extends React.Component {
 	componentDidMount() {
 		let socket = io.connect('http://localhost:3000');
 
-		socket.emit('identifier', {roomId: this.props.UID});
+		socket.emit('identifier', {roomId: this.props.roomId});
 
 		socket.on('fromPeer', (data) => {
 			this.setState({
@@ -40,7 +40,7 @@ class MasterPage extends React.Component {
 	render() {
 		return (
 			<div className="page page--master">
-				<ShortUIDViewer UID={this.props.UID} />
+				<RoomIdViewer roomId={this.props.roomId} />
 				<PlayerList players={this.state.players} />
 			</div>
 		);
