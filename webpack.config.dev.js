@@ -26,7 +26,6 @@ module.exports = {
 			test: /\.jsx?$/,
 			loader: 'babel'
 		}, {
-			include: __dirstyles,
 			test: /\.(css|scss)$/,
 			loaders: ['style', 'css?sourceMap', 'postcss', 'sass?sourceMap']
 		}, {
