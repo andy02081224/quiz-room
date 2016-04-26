@@ -20,6 +20,7 @@
     "express": "^4.13.4",
     "express-handlebars": "^3.0.0",
     "jquery": "^2.2.3",
+    "lodash": "^4.11.1",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "socket.io": "^1.4.5",
