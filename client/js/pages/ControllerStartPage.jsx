@@ -1,7 +1,8 @@
 import React from 'react';
 import io from 'socket.io-client';
+import { browserHistory } from 'react-router';
 
-class ControllerPage extends React.Component {
+class ControllerStartPage extends React.Component {
 	constructor(props) {
 		super(props);
 	}
@@ -11,17 +12,20 @@ class ControllerPage extends React.Component {
 		let roomId = location.pathname.substring(1);
 
 		socket.on('connect', () => {
-			let playerName = prompt('請輸入名稱', `player${socket.id}`);
+			let playerName = prompt('請輸入名稱', `player-${socket.id.substring(0, 6)}`);
 
 			if (playerName) {
 				socket.emit('pair', {
 					roomId: roomId,
 					id: socket.id,
-					name: playerName
+					playerName: playerName
 				});
-
 			}
-		})
+
+			socket.on('fromMaster', (data) => {
+				browserHistory.push(`${roomId}/game`);
+			});
+		});
 
 	}
 
@@ -32,4 +36,4 @@ class ControllerPage extends React.Component {
 	}
 }
 
-export default ControllerPage;
+export default ControllerStartPage;
