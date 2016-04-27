@@ -22,8 +22,8 @@ class ControllerStartPage extends React.Component {
 				});
 			}
 
-			socket.on('fromMaster', (data) => {
-				browserHistory.push(`${roomId}/game`);
+			socket.on('gameStart', (data) => {
+				if (data.gameStart) browserHistory.push(`${roomId}/game`);
 			});
 		});
 

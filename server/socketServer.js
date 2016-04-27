@@ -30,6 +30,10 @@ socketServer.prototype.listen = function(server) {
 			this.io.to(masterSocketId).emit('addPlayer', data);
 		})
 
+		socket.on('gameStart', (data) => {
+			this.io.to(data.roomId).emit('gameStart', { gameStart: true });
+		});	
+
 		socket.on('toController', (data) => {
 			this.io.to(data.roomId).emit('fromMaster', 'message from game master');
 		});

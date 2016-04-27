@@ -32,28 +32,33 @@ class MasterStartPage extends React.Component {
 	componentDidMount() {
 		this.socket = io.connect('http://localhost:3000');
 
-		this.socket.emit('roomId', {roomId: this.props.roomId});
+		this.socket.on('connect', () => {
+			this.socket.emit('roomId', {roomId: this.props.roomId});
 
-		this.socket.on('addPlayer', (data) => {
-			this.setState({
-				players: this.state.players.concat([data])
+			this.socket.on('addPlayer', (data) => {
+				this.setState({
+					players: this.state.players.concat([data])
+				})
+			});
+
+			this.socket.on('playerLeave', (data) => {
+				console.log(`Player ${data.playerName} has left!`);
+
+				// Find left player and remove it from player list
+				this.setState({
+					players: this.state.players.filter((player) => player.id != data.id)
+				});
+			});
+
+			this.socket.on('gameStart', (data) => {
+				if (data.gameStart) browserHistory.push('/game');
 			})
 		});
 
-		this.socket.on('playerLeave', (data) => {
-			console.log(`Player ${data.playerName} has left!`);
-
-			// Find left player and remove it from player list
-	
-			this.setState({
-				players: this.state.players.filter((player) => player.id != data.id)
-			});
-		});
 	}
 
 	handleGameStartClicked() {
-		this.socket.emit('toController', {roomId: this.props.roomId});
-		browserHistory.push('/game');
+		this.socket.emit('gameStart', {roomId: this.props.roomId});
 	}
 
 	render() {
