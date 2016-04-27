@@ -10,4 +10,4 @@ ReactDOM.render((
 		<Route path="/:gameId" component={ControllerStartPage}></Route>
 		<Route path="/:gameId/game" component={ControllerGamePage}></Route>
 	</Router>
-), document.getElementById('game-controller'));
+), document.getElementById('app'));

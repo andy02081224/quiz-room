@@ -13,7 +13,7 @@ module.exports = {
 	entry: {
 		'js/master': './client/js/master.jsx',
 		'js/controller': './client/js/controller.jsx',
-		'js/vendor': ['jquery', 'react', 'react-dom', 'socket.io-client', 'lodash', 'react-router']
+		'js/vendor': ['jquery', 'react', 'react-dom', 'socket.io-client', 'lodash', 'react-router', 'reveal.js']
 	},
 	output: {
 		path: __dirbuild,
