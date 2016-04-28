@@ -7,6 +7,7 @@ var __dirclient = path.resolve(__dirname, 'client');
 var __dirscripts = path.resolve(__dirclient, 'js');
 var __dirstyles = path.resolve(__dirclient, 'styles');
 var __dirimage = path.resolve(__dirclient, 'img');
+var __dirserver = path.resolve(__dirname, 'server');
 
 module.exports = {
 	noInfo: true,
@@ -21,6 +22,11 @@ module.exports = {
 		filename: '[name].bundle.js'
 	},
 	module: {
+		preLoaders: [{
+			include: __dirclient,
+			test: /\.(js|jsx)$/,
+			loaders: ['eslint']
+		}],
 		loaders: [{
 			include: __dirscripts,
 			test: /\.jsx?$/,
@@ -46,6 +52,9 @@ module.exports = {
 	],
 	postcss: function() {
 		return [autoprefixer]
+	},
+	eslint: {
+		configFile: './.eslintrc'
 	}
 };
 
