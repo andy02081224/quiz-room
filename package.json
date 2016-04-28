@@ -17,6 +17,7 @@
   "author": "Chen Yu",
   "license": "ISC",
   "dependencies": {
+    "classnames": "^2.2.4",
     "cross-env": "^1.0.7",
     "express": "^4.13.4",
     "express-handlebars": "^3.0.0",

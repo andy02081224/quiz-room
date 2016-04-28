@@ -14,7 +14,7 @@ const RoomIdViewer = function RoomIdViewer(props) {
 			<section className="roomId-viewer__qrcode"><img src={qrcodeUrl} alt=""/></section>
 		</div>
 	);
-}
+};
 
 RoomIdViewer.defaultProps = {
 	qrcodeSize: 100

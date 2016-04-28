@@ -2,8 +2,10 @@
 
 /* 2. vendor */
 @import 'vendor/normalize';
+@import 'vendor/bootstrap-grid';
 
 /* 3. base */
+@import 'base/base';
 
 /* 4. layout */
 @import 'layout/layout';

@@ -9,10 +9,6 @@ import { browserHistory } from 'react-router';
 import RoomIdViewer from '../components/RoomIdViewer/RoomIdViewer.jsx';
 import PlayerList from '../components/PlayerList/PlayerList.jsx';
 
-/* Styles */
-import '../../styles/app.scss';
-
-
 class MasterStartPage extends React.Component {
 	static defaultProps = {
 		roomId: Utils.generateShortUID()
@@ -26,7 +22,7 @@ class MasterStartPage extends React.Component {
 		this.socket = null;
 		this.state = {
 			players: []
-		}
+		};
 	}
 
 	componentDidMount() {
@@ -38,7 +34,7 @@ class MasterStartPage extends React.Component {
 			this.socket.on('addPlayer', (data) => {
 				this.setState({
 					players: this.state.players.concat([data])
-				})
+				});
 			});
 
 			this.socket.on('playerLeave', (data) => {
@@ -52,7 +48,7 @@ class MasterStartPage extends React.Component {
 
 			this.socket.on('gameStart', (data) => {
 				if (data.gameStart) browserHistory.push('/game');
-			})
+			});
 		});
 
 	}
@@ -63,7 +59,7 @@ class MasterStartPage extends React.Component {
 
 	render() {
 		return (
-			<div className="page page--master">
+			<div className="page page--master-start">
 				<RoomIdViewer roomId={this.props.roomId} />
 				<PlayerList players={this.state.players} onGameStartClicked={this.handleGameStartClicked}/>
 			</div>

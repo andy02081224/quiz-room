@@ -5,6 +5,9 @@ import { Router, Route, browserHistory } from 'react-router';
 import MasterStartPage from './pages/MasterStartPage.jsx';
 import MasterGamePage from './pages/MasterGamePage.jsx';
 
+/* Styles */
+import '../styles/app.scss';
+
 ReactDOM.render((
 	<Router history={browserHistory}>
 		<Route path="/" component={MasterStartPage}></Route>

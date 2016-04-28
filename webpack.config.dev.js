@@ -14,7 +14,7 @@ module.exports = {
 	entry: {
 		'js/master': './client/js/master.jsx',
 		'js/controller': './client/js/controller.jsx',
-		'js/vendor': ['webpack/hot/dev-server','webpack-dev-server/client?http://localhost:8080', 'jquery', 'react', 'react-dom', 'socket.io-client', 'lodash', 'react-router', 'reveal.js']
+		'js/vendor': ['webpack/hot/dev-server','webpack-dev-server/client?http://localhost:8080', 'jquery', 'react', 'react-dom', 'socket.io-client', 'lodash', 'react-router', 'reveal.js', 'classnames']
 	},
 	output: {
 		path: '/',

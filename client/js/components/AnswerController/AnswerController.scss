@@ -1,0 +1,58 @@
+$confirm-btn-height: 150px;
+$color-nephritis: #27ae60;
+$color-alizarin: #e74c3c;
+$color-peter-river: #3498db;
+
+.answer-controller {
+	height: 100%;
+	font-size: 10rem;
+	text-align: center;
+	position: relative;
+	padding-bottom: 100px;
+
+	&__control {
+		// height: calc(100% - 100px);
+		position: absolute;
+		width: 100%;
+		top: calc(50% - #{$confirm-btn-height / 2});
+		transform: translateY(-50%);
+	}
+
+	&__control--true-false >  &__control-option {
+		background-clip: content-box;
+		padding: 50px 15px;
+	}
+
+	&__control--true-false >  &__control-option:hover {
+		cursor: pointer;
+	}
+
+	&__control--true-false >  &__control-option--selected {
+		padding-top: 45px; 
+		border: 5px dashed black;
+	}
+
+	&__control-option[data-value="true"] {
+		background-color: $color-nephritis;
+	}
+
+	&__control-option[data-value="false"] {
+		background-color: $color-alizarin;
+		color: white;
+	}
+
+	&__confirm-btn {
+		font-size: 0.5em;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		height: $confirm-btn-height;
+		width: 100%;
+	}
+
+	&__confirm-btn:hover, &__confirm-btn:active {
+		cursor: pointer;
+		background-color: $color-peter-river;
+		color: white;
+	}
+}

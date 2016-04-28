@@ -31,7 +31,7 @@ class ControllerStartPage extends React.Component {
 
 	render() {
 		return (
-			<div>controller page</div>
+			<div className="page page--controller-start">controller page</div>
 		);
 	}
 }

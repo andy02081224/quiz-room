@@ -1,4 +1,5 @@
 import React from 'react';
+import AnswerController from '../components/AnswerController/AnswerController.jsx';
 
 class ControllerGamePage extends React.Component {
 	constructor(props) {
@@ -7,7 +8,9 @@ class ControllerGamePage extends React.Component {
 
 	render() {
 		return(
-			<div>ControllerGamePage</div>
+			<div className="page page--controller-game">
+				<AnswerController />
+			</div>
 		);
 	}
 }
