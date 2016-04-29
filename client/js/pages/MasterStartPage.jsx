@@ -19,14 +19,14 @@ class MasterStartPage extends React.Component {
 
 		this.handleGameStartClicked = this.handleGameStartClicked.bind(this);
 
-		this.socket = null;
+		this.socket = this.props.route.socket;
 		this.state = {
 			players: []
 		};
 	}
 
 	componentDidMount() {
-		this.socket = io.connect('http://localhost:3000');
+		// this.socket = io.connect('http://localhost:3000');
 
 		this.socket.on('connect', () => {
 			this.socket.emit('roomId', {roomId: this.props.roomId});

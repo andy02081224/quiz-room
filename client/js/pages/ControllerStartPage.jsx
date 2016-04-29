@@ -5,25 +5,27 @@ import { browserHistory } from 'react-router';
 class ControllerStartPage extends React.Component {
 	constructor(props) {
 		super(props);
+		this.socket = this.props.route.socket;
 	}
 
 	componentDidMount() {
-		let socket = io.connect('http://localhost:3000');
+		// let socket = io.connect('http://localhost:3000');
+		console.log('start page socket:', this.socket);
 		let roomId = location.pathname.substring(1);
 
-		socket.on('connect', () => {
-			let playerName = prompt('請輸入名稱', `player-${socket.id.substring(0, 6)}`);
+		this.socket.on('connect', () => {
+			let playerName = prompt('請輸入名稱', `player-${this.socket.id.substring(0, 6)}`);
 
 			if (playerName) {
-				socket.emit('pair', {
+				this.socket.emit('pair', {
 					roomId: roomId,
-					id: socket.id,
+					id: this.socket.id,
 					playerName: playerName
 				});
 			}
 
-			socket.on('gameStart', (data) => {
-				if (data.gameStart) browserHistory.push(`${roomId}/game`);
+			this.socket.on('gameStart', (data) => {
+				if (data.gameStart) browserHistory.push(`${roomId}/${playerName}/game`);
 			});
 		});
 

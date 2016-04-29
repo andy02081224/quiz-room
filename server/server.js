@@ -57,7 +57,7 @@ app.get('/:gameId', (req, res) => {
 	});
 });
 
-app.get('/:gameId/game', (req, res) => {
+app.get('/:gameId/:playerName/game', (req, res) => {
 	let gameId = req.params.gameId;
 	socketServer.connectPeers(gameId, (error) => {
 		if (!error) {

@@ -8,9 +8,14 @@ import './AnswerController.scss';
 class AnswerController extends React.Component {
 	constructor(props) {
 		super(props);
+
 		this.state = {
 			currentValue: null
 		};
+		this.socket = this.props.socket;
+		this.playerName = this.props.playerName;
+		this.roomId = this.props.roomId;
+
 		this.handleTrueFalseClicked = this.handleTrueFalseClicked.bind(this);
 		this.handleConfirmButtonClicked = this.handleConfirmButtonClicked.bind(this);
 	}
@@ -23,7 +28,12 @@ class AnswerController extends React.Component {
 	}
 
 	handleConfirmButtonClicked() {
-
+		console.log(this.roomId);
+		this.socket.emit('submitAnswer', {
+			playerName: this.playerName,
+			roomId: this.roomId,
+			answer: this.state.currentValue
+		});
 	}
 
 	render() {
