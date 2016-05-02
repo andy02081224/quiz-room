@@ -8,6 +8,7 @@ var __dirscripts = path.resolve(__dirclient, 'js');
 var __dirstyles = path.resolve(__dirclient, 'styles');
 var __dirimage = path.resolve(__dirclient, 'img');
 var __dirserver = path.resolve(__dirname, 'server');
+var __dirnodemodules = path.resolve(__dirname, 'node_modules');
 
 module.exports = {
 	noInfo: true,
@@ -41,6 +42,10 @@ module.exports = {
 				'url-loader?name=img/[hash].[ext]&limit=8192',
 				'image-webpack-loader?bypassOnDebug=true&optimizationLevel=7'
 			]
+		}, {
+			include: [__dirstyles, __dirnodemodules],
+			test: /\.(svg|woff|woff2|[ot]tf|eot)$/,
+			loader: 'url?limit=65000&mimetype=application/octet-stream&name=font/[name].[ext]'
 		}]
 	},
 	plugins: [

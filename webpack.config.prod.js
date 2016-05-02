@@ -8,6 +8,7 @@ var __dirclient = path.resolve(__dirname, 'client');
 var __dirscripts = path.resolve(__dirclient, 'js');
 var __dirstyles = path.resolve(__dirclient, 'styles');
 var __dirimage = path.resolve(__dirclient, 'img');
+var __dirnodemodules = path.resolve(__dirname, 'node_modules');
 
 module.exports = {
 	entry: {
@@ -26,7 +27,6 @@ module.exports = {
 			test: /\.jsx?$/,
 			loader: 'babel-loader'
 		}, {
-			include: __dirstyles,
 			test: /\.(css|scss)$/,
 			loaders: ['style', 'css?sourceMap&minimize', 'postcss', 'sass?sourceMap']
 		}, {
@@ -36,6 +36,10 @@ module.exports = {
 				'url-loader?name=img/[hash].[ext]&limit=8192',
 				'image-webpack-loader?bypassOnDebug=true&optimizationLevel=7'
 			]
+		}, {
+			include: [__dirstyles, __dirnodemodules],
+			test: /\.(svg|woff|woff2|[ot]tf|eot)$/,
+			loader: 'url?limit=65000&mimetype=application/octet-stream&name=font/[name].[ext]'
 		}]
 	},
 	plugins: [
