@@ -3,7 +3,7 @@ import React from 'react';
 import io from 'socket.io-client';
 import { findIndex } from 'lodash';
 import Utils from '../utils/utils';
-import { browserHistory } from 'react-router';
+import { browserHistory, withRouter } from 'react-router';
 
 /* Components */
 import RoomIdViewer from '../components/RoomIdViewer/RoomIdViewer.jsx';
@@ -18,7 +18,7 @@ class MasterStartPage extends React.Component {
 		super(props);
 
 		this.handleGameStartClicked = this.handleGameStartClicked.bind(this);
-
+		console.log('router:', this.props);
 		this.socket = this.props.route.socket;
 		this.state = {
 			players: []
@@ -47,7 +47,15 @@ class MasterStartPage extends React.Component {
 			});
 
 			this.socket.on('gameStart', (data) => {
-				if (data.gameStart) browserHistory.push('/game');
+				// if (data.gameStart) browserHistory.push('/game');
+				if (data.gameStart) {
+					this.props.router.push({
+						pathname: '/game',
+						state: {
+							players: this.state.players
+						}
+					});
+				}
 			});
 		});
 
@@ -67,4 +75,4 @@ class MasterStartPage extends React.Component {
 	}
 }
 
-export default MasterStartPage;
+export default withRouter(MasterStartPage);

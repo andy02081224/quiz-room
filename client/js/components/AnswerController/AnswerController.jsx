@@ -1,4 +1,5 @@
 import React from 'react';
+import { extend } from 'lodash';
 
 import TrueFalseControl from './TrueFalseControl.jsx';
 import ConfirmButton from './ConfirmButton.jsx';
@@ -13,8 +14,6 @@ class AnswerController extends React.Component {
 			currentValue: null
 		};
 		this.socket = this.props.socket;
-		this.playerName = this.props.playerName;
-		this.roomId = this.props.roomId;
 
 		this.handleTrueFalseClicked = this.handleTrueFalseClicked.bind(this);
 		this.handleConfirmButtonClicked = this.handleConfirmButtonClicked.bind(this);
@@ -28,12 +27,10 @@ class AnswerController extends React.Component {
 	}
 
 	handleConfirmButtonClicked() {
-		console.log(this.roomId);
-		this.socket.emit('submitAnswer', {
-			playerName: this.playerName,
-			roomId: this.roomId,
+		console.log(this.props.player);
+		this.socket.emit('submitAnswer', extend(this.props.player, {
 			answer: this.state.currentValue
-		});
+		}));
 	}
 
 	render() {

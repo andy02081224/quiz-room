@@ -37,10 +37,7 @@ socketServer.prototype.listen = function(server) {
 		socket.on('submitAnswer', (data) => {
 			let masterSocketId = this.keyStore[data.roomId];
 
-			this.io.to(masterSocketId).emit('receiveAnswer', {
-				playerName: data.playerName,
-				answer: data.answer
-			});
+			this.io.to(masterSocketId).emit('receiveAnswer', data);
 			console.log('master socket id:', masterSocketId);
 			console.log(`${data.playerName} submits answer: ${data.answer}`)
 		});	
