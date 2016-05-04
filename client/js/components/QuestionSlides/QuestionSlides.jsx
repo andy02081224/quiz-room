@@ -4,6 +4,7 @@ import { extend } from 'lodash';
 
 import '../../../../node_modules/reveal.js/css/reveal.css';
 import '../../../../node_modules/reveal.js/css/theme/solarized.css';
+import './QuestionSlides.scss';
 
 import PlayerTable from './PlayerTable.jsx';
 
@@ -11,8 +12,7 @@ class QuestionSlides extends React.Component {
 	constructor(props) {
 		super(props);
 
-
-
+		this.socket = this.props.socket;
 		this.state = {
 			playerState: this.props.players.map((player) => {
 				return {
@@ -23,13 +23,14 @@ class QuestionSlides extends React.Component {
 			})
 		};
 
-		this.socket = this.props.socket;
+		this.handleAllPlayerAnswered = this.handleAllPlayerAnswered.bind(this);
 	}
 
 	componentDidMount() {
 		Reveal.initialize({
 			slideNumber: true,
-			center: true
+			center: true,
+			overview: false
 		});
 
 		this.socket.on('receiveAnswer', (data) => {
@@ -38,7 +39,7 @@ class QuestionSlides extends React.Component {
 			let updatedState = this.state.playerState.map((player) => {
 				if (player.id == data.id) {
 					return extend(player, {
-						submitAnswer: data.answer
+						submitAnswer: data.answer ? true: false
 					});	
 				}
 
@@ -50,16 +51,32 @@ class QuestionSlides extends React.Component {
 			this.setState({
 				playerState: updatedState
 			});
+
 		});
+	}
+
+	handleAllPlayerAnswered() {
+		console.log('All player answered!');
+
+		this.setState({
+			playerState: this.state.playerState.map((player) => {
+				return extend(player, {
+					submitAnswer: false
+				});	
+			})
+		});
+
+		Reveal.next();
 	}
 
 	render() {
 		return(
+
 			<div className="reveal">
+				<PlayerTable playerState={this.state.playerState} onAllPlayerAnswered={this.handleAllPlayerAnswered} />
 				<div className="slides">
 					<section>
 						<h2>Q1: 美國的首都是紐約。</h2>
-						<PlayerTable playerState={this.state.playerState} />
 					</section>
 					<section>
 						<h2>Q2: 第二次世界大戰在哪一年結束?</h2>
@@ -69,7 +86,6 @@ class QuestionSlides extends React.Component {
 							<li>C: 1949</li>
 							<li>D: 1989</li>
 						</ul>
-						<PlayerTable playerState={this.state.playerState} />
 					</section>
 					<section>
 						<section>v1</section>

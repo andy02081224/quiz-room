@@ -5,13 +5,16 @@ const PlayerTable = function(props) {
 		return (
 			<tr key={player.id}>
 				<td>{player.name}</td>
-				<td>{player.submitAnswer}</td>
+				<td>{player.submitAnswer ? 'Answer submited' : '' }</td>
 			</tr>
 		);
 	});
 
+	let allPlayerAnswered = props.playerState.every((player) => player.submitAnswer);
+	if (allPlayerAnswered) setTimeout(() => props.onAllPlayerAnswered(), 1000);
+
 	return (
-		<table>
+		<table className="player-table">
 			<thead>
 				<tr>
 					<th>Name</th>
