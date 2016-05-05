@@ -15,6 +15,7 @@ socketServer.prototype.listen = function(server) {
 
 		socket.on('roomId', (data) => {
 			this.keyStore[data.roomId] = socket.id;
+			socket.roomId = data.roomId;
 			socket.join(data.roomId);
 
 			console.log('Room ID:', data.roomId, 'Socket ID:', socket.id);
@@ -34,6 +35,10 @@ socketServer.prototype.listen = function(server) {
 			this.io.to(data.roomId).emit('gameStart', { gameStart: true });
 		});
 
+		socket.on('questionTypeChange', (data) => {
+			this.io.to(socket.roomId).emit('questionTypeChange', data);
+		});
+
 		socket.on('submitAnswer', (data) => {
 			let masterSocketId = this.keyStore[data.roomId];
 
@@ -42,9 +47,14 @@ socketServer.prototype.listen = function(server) {
 			console.log(`${data.playerName} submits answer: ${data.answer}`)
 		});	
 
+		socket.on('nextQuestion', (data) => {
+			this.io.to(socket.roomId).emit('nextQuestion', data);
+		});
+		
 		socket.on('toController', (data) => {
 			this.io.to(data.roomId).emit('fromMaster', 'message from game master');
 		});
+
 
 		socket.on('disconnect', (data) => {
 			let masterId = this.keyStore[socket.roomId];

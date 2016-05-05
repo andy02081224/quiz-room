@@ -19,7 +19,7 @@ const TrueFalseControl = function(props) {
 	}));
 
 	return (
-		<div className="row answer-controller__control answer-controller__control--true-false" onClick={props.onTrueFalseClicked}>
+		<div className="row answer-controller__control answer-controller__control--true-false" onClick={props.onValueChanged}>
 			<div className={trueOptionClass} data-value="true">O</div>
 			<div className={falseOptionClass} data-value="false">X</div>
 		</div>

@@ -5,8 +5,12 @@ import io from 'socket.io-client';
 class ControllerGamePage extends React.Component {
 	constructor(props) {
 		super(props);
-		this.socket = this.props.route.socket;
 
+		this.state = {
+			questionType: null
+		};
+
+		this.socket = this.props.route.socket;
 		this.player = {
 			id: this.socket.id,
 			playerName: this.props.params.playerName,
@@ -15,12 +19,18 @@ class ControllerGamePage extends React.Component {
 	}
 
 	componentDidMount() {
+		this.socket.on('questionTypeChange', (data) => {
+			this.setState({
+				questionType: data.questionType
+			});
+		});
 	}
 
 	render() {
 		return(
 			<div className="page page--controller-game">
 				<AnswerController 
+					questionType={this.state.questionType}
 					socket={this.socket}
 					player={this.player} 
 				/>
