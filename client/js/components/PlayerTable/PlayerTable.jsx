@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './PlayerTable.scss';
+
 const PlayerTable = function(props) {
 	let players = props.playerState.map((player) => {
 		return (
@@ -11,7 +13,7 @@ const PlayerTable = function(props) {
 	});
 
 	let allPlayerAnswered = props.playerState.every((player) => player.submitAnswer);
-	if (allPlayerAnswered) setTimeout(() => props.onAllPlayerAnswered(), 1000);
+	if (allPlayerAnswered && props.playerState.length >= 2) setTimeout(() => props.onAllPlayerAnswer(), 1000);
 
 	return (
 		<table className="player-table">

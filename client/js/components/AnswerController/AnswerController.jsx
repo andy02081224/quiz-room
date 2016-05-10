@@ -36,13 +36,13 @@ class AnswerController extends React.Component {
 			case null:
 				control = <div>Loading</div>;
 				break;
-			case 'trueFalse':
+			case 'question-trueFalse':
 				control = (<TrueFalseControl 
 					onValueChanged={this.handleValueChanged} 
 					currentValue={this.state.currentValue} 
 				/>);
 				break;
-			case 'multiple':
+			case 'question-multiple':
 				control = (<MultipleChoiceControl 
 					onValueChanged={this.handleValueChanged} 
 					currentValue={this.state.currentValue} 
