@@ -14,7 +14,8 @@ class MasterGamePage extends React.Component {
 		this.socket = this.props.route.socket;
 		this.SLIDE_TYPES = {
 			INTRO: 'intro',
-			QUESTION: 'question',
+			QUESTION_TRUE_FALSE: 'question-true-false',
+			QUESTION_MULTIPLE: 'question-multiple',
 			RESULT: 'result'
 		};
 		this.gameStats = {

@@ -2,9 +2,13 @@ import React from 'react';
 import Reveal from 'reveal.js';
 import { extend } from 'lodash';
 
+/* Components */
+import IntroSlide from './IntroSlide.jsx';
+
 /* Styles */
 import '../../../../node_modules/reveal.js/css/reveal.css';
 import '../../../../node_modules/reveal.js/css/theme/solarized.css';
+import './Slides.scss';
 
 class Slides extends React.Component {
 	constructor(props) {
@@ -50,26 +54,35 @@ class Slides extends React.Component {
 	render() {
 		/**
 		 * Slide types:
-		 * 1.Starts with "intro": Intro slide
-		 * 2.Starts with "question": Question slide
-		 * 3.Starts with "result": Result slide 
+		 * 1.Starts with "INTRO": Intro slide
+		 * 2.Starts with "QUESTION": Question slide
+		 * 3.Starts with "RESULT": Result slide 
 		 */
+		
+		let questionTypes = Object.keys(this.props.slideTypes).filter((type) => {
+			return type.startsWith('QUESTION');
+		});
+
 		return (
 			<div className="reveal">
 				<div className="slides">
-					<section data-type={this.props.slideTypes.INTRO}>
-						<h2>是非題</h2>
-					</section>
-					<section data-type={`${this.props.slideTypes.QUESTION}-trueFalse`}>
-						<h2>Q1: 美國的首都是紐約。</h2>
-					</section>
-					<section data-type={`${this.props.slideTypes.QUESTION}-trueFalse`}>
+					<IntroSlide 
+						type={this.props.slideTypes.INTRO} 
+						title="Quiz Room"
+						subtitle="Your online game room"
+						content="中文測試" 
+					/>
+					<IntroSlide 
+						type={this.props.slideTypes.INTRO} 
+						title="是非題"
+					/>
+					<section data-type={this.props.slideTypes.QUESTION_TRUE_FALSE}>
 						<h2>Q1: 玉山的高度超過4000公尺。</h2>
 					</section>
 					<section data-type={this.props.slideTypes.INTRO}>
 						<h2>選擇題題</h2>
 					</section>
-					<section data-type={`${this.props.slideTypes.QUESTION}-multiple`}>
+					<section data-type={this.props.slideTypes.QUESTION_MULTIPLE}>
 						<h2>Q2: 第二次世界大戰在哪一年結束?</h2>
 						<ul>
 							<li>A: 1925</li>
