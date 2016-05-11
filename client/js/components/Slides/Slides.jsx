@@ -4,6 +4,7 @@ import { extend } from 'lodash';
 
 /* Components */
 import IntroSlide from './IntroSlide.jsx';
+import QuestionSlide from './QuestionSlide.jsx';
 
 /* Styles */
 import '../../../../node_modules/reveal.js/css/reveal.css';
@@ -43,9 +44,10 @@ class Slides extends React.Component {
 	}
 
 	getSlideWrappedObj(slide, extendObj={}) {
+		let slideType = slide.getAttribute('data-type');
 		let wrappedObj = {
 			type: slide.getAttribute('data-type'),
-			isQuestionSlide: slide.getAttribute('data-type').startsWith('question')
+			isQuestionSlide: slideType ? slideType.startsWith('question') : false
 		};
 
 		return extend(wrappedObj, extendObj);
@@ -75,6 +77,15 @@ class Slides extends React.Component {
 					<IntroSlide 
 						type={this.props.slideTypes.INTRO} 
 						title="是非題"
+					/>
+					<QuestionSlide
+						type={this.props.slideTypes.QUESTION_TRUE_FALSE}
+						title="question slide truefalse"
+					/>
+					<QuestionSlide
+						type={this.props.slideTypes.QUESTION_MULTIPLE}
+						title="question slide multiple"
+						options={["a for apple", "b for ball", "c for cat", "d for dog"]}
 					/>
 					<section data-type={this.props.slideTypes.QUESTION_TRUE_FALSE}>
 						<h2>Q1: 玉山的高度超過4000公尺。</h2>
