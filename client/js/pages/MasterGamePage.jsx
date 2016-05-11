@@ -29,6 +29,9 @@ class MasterGamePage extends React.Component {
 			})
 		};
 		this.state = {
+			slidesData: {
+				questions: []
+			},
 			playerState: this.props.location.state.players.map((player) => {
 				return {
 					id: player.id,
@@ -41,6 +44,19 @@ class MasterGamePage extends React.Component {
 		this.handleSlideChange = this.handleSlideChange.bind(this);
 		this.handleAllPlayerAnswer = this.handleAllPlayerAnswer.bind(this);
 
+	}
+
+	loadSlidesDataFromServer() {
+		fetch('/temp.json')
+			.then((response) => {
+				return response.json();
+			})
+			.then((data) => {
+				this.setState({
+					slidesData: data
+				});
+			})
+			.catch();
 	}
 
 	handleSlideChange(slide) {
@@ -79,6 +95,8 @@ class MasterGamePage extends React.Component {
 	}
 
 	componentDidMount() {
+		this.loadSlidesDataFromServer();
+
 		this.socket.on('receiveAnswer', (data) => {
 			console.log('receiveAnswer:', data);
 
@@ -102,7 +120,7 @@ class MasterGamePage extends React.Component {
 		return(
 			<div className="page page--master-game">
 				<PlayerTable playerState={this.state.playerState} onAllPlayerAnswer={this.handleAllPlayerAnswer} />
-				<Slides slideTypes={this.SLIDE_TYPES} onSlideChange={this.handleSlideChange} />
+				<Slides slidesData={this.state.slidesData} slideTypes={this.SLIDE_TYPES} onSlideChange={this.handleSlideChange} />
 			</div>
 		);
 	}

@@ -53,6 +53,19 @@ class Slides extends React.Component {
 		return extend(wrappedObj, extendObj);
 	}
 
+	renderQuestionSlides() {
+		let questionSlides = this.props.slidesData.questions.map((question, index) => {
+			return (<QuestionSlide
+				key={index}
+				type={question.type}
+				title={question.title}
+				options={question.options}
+			/>);
+		});
+
+		return questionSlides;
+	}
+
 	render() {
 		/**
 		 * Slide types:
@@ -70,38 +83,11 @@ class Slides extends React.Component {
 				<div className="slides">
 					<IntroSlide 
 						type={this.props.slideTypes.INTRO} 
-						title="Quiz Room"
-						subtitle="Your online game room"
-						content="中文測試" 
+						title={this.props.slidesData.title}
+						subtitle={this.props.slidesData.subtitle}
+						content={this.props.slidesData.description} 
 					/>
-					<IntroSlide 
-						type={this.props.slideTypes.INTRO} 
-						title="是非題"
-					/>
-					<QuestionSlide
-						type={this.props.slideTypes.QUESTION_TRUE_FALSE}
-						title="question slide truefalse"
-					/>
-					<QuestionSlide
-						type={this.props.slideTypes.QUESTION_MULTIPLE}
-						title="question slide multiple"
-						options={["a for apple", "b for ball", "c for cat", "d for dog"]}
-					/>
-					<section data-type={this.props.slideTypes.QUESTION_TRUE_FALSE}>
-						<h2>Q1: 玉山的高度超過4000公尺。</h2>
-					</section>
-					<section data-type={this.props.slideTypes.INTRO}>
-						<h2>選擇題題</h2>
-					</section>
-					<section data-type={this.props.slideTypes.QUESTION_MULTIPLE}>
-						<h2>Q2: 第二次世界大戰在哪一年結束?</h2>
-						<ul>
-							<li>A: 1925</li>
-							<li>B: 1945</li>
-							<li>C: 1949</li>
-							<li>D: 1989</li>
-						</ul>
-					</section>
+					{this.renderQuestionSlides()}
 					<section data-type={this.props.slideTypes.RESULT}>
 						<section>v1</section>
 						<section>v2</section>
