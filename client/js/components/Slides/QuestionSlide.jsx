@@ -7,7 +7,14 @@ const QuestionSlide = function(props) {
 
 	if (props.options && Array.isArray(props.options)) {
 		optionLayout = props.options.map((option, index) => {
-			return <QuestionOption key={index} content={option} />;
+			let identifier = option.split(':')[0];
+			let content = option.split(':')[1];
+
+			return (<QuestionOption 
+				key={index} 
+				identifier={identifier} 
+				content={content} 
+			/>);
 		});
 
 		optionLayout = React.createElement('ul', {}, optionLayout);
@@ -17,7 +24,7 @@ const QuestionSlide = function(props) {
 
 	return (
 		<section data-type={props.type}>
-			<h2>{props.title}</h2>
+			<h2>Q{props.index}.&nbsp;{props.title}</h2>
 			{optionLayout}
 		</section>
 	);

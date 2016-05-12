@@ -35,8 +35,8 @@ socketServer.prototype.listen = function(server) {
 			this.io.to(data.roomId).emit('gameStart', { gameStart: true });
 		});
 
-		socket.on('questionTypeChange', (data) => {
-			this.io.to(socket.roomId).emit('questionTypeChange', data);
+		socket.on('questionChange', (data) => {
+			this.io.to(socket.roomId).emit('questionChange', data);
 		});
 
 		socket.on('submitAnswer', (data) => {

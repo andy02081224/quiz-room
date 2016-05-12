@@ -7,7 +7,8 @@ class ControllerGamePage extends React.Component {
 		super(props);
 
 		this.state = {
-			questionType: null
+			questionType: null,
+			options: null
 		};
 
 		this.socket = this.props.route.socket;
@@ -18,12 +19,17 @@ class ControllerGamePage extends React.Component {
 		};
 	}
 
-	componentDidMount() {
-		this.socket.on('questionTypeChange', (data) => {
+	registerSocketEvents() {
+		this.socket.on('questionChange', (data) => {
 			this.setState({
-				questionType: data.questionType
+				questionType: data.questionType,
+				optionCount: data.optionCount
 			});
 		});
+	}
+
+	componentDidMount() {
+		this.registerSocketEvents();
 	}
 
 	render() {
@@ -31,6 +37,7 @@ class ControllerGamePage extends React.Component {
 			<div className="page page--controller-game">
 				<AnswerController 
 					questionType={this.state.questionType}
+					optionCount={this.state.optionCount}
 					socket={this.socket}
 					player={this.player} 
 				/>

@@ -25,13 +25,13 @@ class Slides extends React.Component {
 			overview: false
 		});
 
-		let firstSlide = document.querySelector('.slides > section[data-type]');
-		let firstSlideType = this.getSlideWrappedObj(firstSlide, {
+		let firstSlideElement = document.querySelector('.slides > section[data-type]');
+		let firstSlide = this.getSlideWrappedObj(firstSlideElement, {
 			indexh: 0,
 			indexv: 0
 		});
 
-		this.props.onSlideChange(firstSlideType);
+		this.props.onSlideChange(firstSlide);
 
 		Reveal.addEventListener('slidechanged', (event) => {
 			let slide = this.getSlideWrappedObj(event.currentSlide, {
@@ -44,10 +44,16 @@ class Slides extends React.Component {
 	}
 
 	getSlideWrappedObj(slide, extendObj={}) {
+		console.log(slide);
 		let slideType = slide.getAttribute('data-type');
+		let optionCount = slide.querySelectorAll('ul > [data-identifier]').length;
+		
+
+
 		let wrappedObj = {
 			type: slide.getAttribute('data-type'),
-			isQuestionSlide: slideType ? slideType.startsWith('question') : false
+			isQuestionSlide: slideType ? slideType.startsWith('question') : false,
+			optionCount: optionCount
 		};
 
 		return extend(wrappedObj, extendObj);
@@ -57,6 +63,7 @@ class Slides extends React.Component {
 		let questionSlides = this.props.slidesData.questions.map((question, index) => {
 			return (<QuestionSlide
 				key={index}
+				index={index + 1}
 				type={question.type}
 				title={question.title}
 				options={question.options}
@@ -88,10 +95,10 @@ class Slides extends React.Component {
 						content={this.props.slidesData.description} 
 					/>
 					{this.renderQuestionSlides()}
-					<section data-type={this.props.slideTypes.RESULT}>
-						<section>v1</section>
-						<section>v2</section>
-						<section>v3</section>
+					<section>
+						<section data-type={this.props.slideTypes.RESULT}>v1</section>
+						<section data-type={this.props.slideTypes.RESULT}>v2</section>
+						<section data-type={this.props.slideTypes.RESULT}>v3</section>
 					</section>
 				</div>
 			</div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Reveal from 'reveal.js';
-import { extend } from 'lodash';
+import { extend, find } from 'lodash';
 
 import PlayerTable from '../components/PlayerTable/PlayerTable.jsx';
 import Slides from '../components/Slides/Slides.jsx';
@@ -18,32 +18,36 @@ class MasterGamePage extends React.Component {
 			QUESTION_MULTIPLE: 'question-multiple',
 			RESULT: 'result'
 		};
-		this.gameStats = {
-			winner: null,
-			score: this.props.location.state.players.map((player) => {
-				return {
-					id: player.id,
-					name: player.playerName,
-					score: 0
-				};
-			})
-		};
+		// this.gameStats = {
+		// 	winner: null,
+		// 	players: this.props.location.state.players.map((player) => {
+		// 		return {
+		// 			id: player.id,
+		// 			name: player.playerName,
+		// 			score: 0
+		// 		};
+		// 	})
+		// };
 		this.state = {
 			slidesData: {
 				questions: []
+			},
+			gameState: {
+				isGameFinished: false
 			},
 			playerState: this.props.location.state.players.map((player) => {
 				return {
 					id: player.id,
 					name: player.playerName,
-					submitAnswer: false
+					score: 0,
+					submitAnswer: false,
+					submittedAnswers: []
 				};
 			})
 		};
 
 		this.handleSlideChange = this.handleSlideChange.bind(this);
 		this.handleAllPlayerAnswer = this.handleAllPlayerAnswer.bind(this);
-
 	}
 
 	loadSlidesDataFromServer() {
@@ -59,24 +63,72 @@ class MasterGamePage extends React.Component {
 			.catch();
 	}
 
+	registerSocketEvents() {
+		this.socket.on('receiveAnswer', (data) => {
+			console.log('receiveAnswer:', data);
+
+			let updatedState = this.state.playerState.map((player) => {
+				if (player.id == data.id) {
+					player.submittedAnswers.push(data.answer);
+
+					return extend(player, {
+						submitAnswer: data.answer ? true : false
+					});	
+				}
+
+				return player;
+			});
+
+			this.setState({
+				playerState: updatedState
+			});
+		});
+	}
+
+	checkAnswer() {
+		console.log(this.state.playerState);
+		let answers = this.state.slidesData.questions.map((question) => {
+			return question.answer;
+		});
+
+		console.log('Correct answers:', answers);
+		let updatedState = this.state.playerState.map((player) => {
+			console.log('Player answers:', player.submittedAnswers);
+
+			player.score = player.submittedAnswers.filter((answer, index) => {
+				return answer == answers[index].toString();
+			}).length;
+
+			return player;
+		});
+
+		console.log(updatedState);
+	}
+
 	handleSlideChange(slide) {
-		console.log('Slide type:', slide);
+		console.log('Slide:', slide);
 
 		if (slide.type == this.SLIDE_TYPES.INTRO) {
 			setTimeout(() => Reveal.next(), 3000);
 		}
 		else if (slide.isQuestionSlide) {
 			if (this.currentQuestionType != slide.type) {
-				this.socket.emit('questionTypeChange', {
-					questionType: slide.type
+				this.socket.emit('questionChange', {
+					questionType: slide.type,
+					optionCount: slide.optionCount
 				});
 			}
 
 			this.currentQuestionType = slide.type;
 		}
 		else if (slide.type == this.SLIDE_TYPES.RESULT) {
-			// result
+			this.handleGameFinish();
 		}
+	}
+
+	handleGameFinish() {
+		console.log('game finish!');
+		this.checkAnswer();
 	}
 
 	handleAllPlayerAnswer() {
@@ -96,24 +148,7 @@ class MasterGamePage extends React.Component {
 
 	componentDidMount() {
 		this.loadSlidesDataFromServer();
-
-		this.socket.on('receiveAnswer', (data) => {
-			console.log('receiveAnswer:', data);
-
-			let updatedState = this.state.playerState.map((player) => {
-				if (player.id == data.id) {
-					return extend(player, {
-						submitAnswer: data.answer ? true: false
-					});	
-				}
-
-				return player;
-			});
-
-			this.setState({
-				playerState: updatedState
-			});
-		});
+		this.registerSocketEvents();
 	}
 
 	render() {

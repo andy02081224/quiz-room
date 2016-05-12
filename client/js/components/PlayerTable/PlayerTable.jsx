@@ -13,7 +13,7 @@ const PlayerTable = function(props) {
 	});
 
 	let allPlayerAnswered = props.playerState.every((player) => player.submitAnswer);
-	if (allPlayerAnswered && props.playerState.length >= 2) setTimeout(() => props.onAllPlayerAnswer(), 1000);
+	if (allPlayerAnswered && props.playerState.length >= 1) setTimeout(() => props.onAllPlayerAnswer(), 1000);
 
 	return (
 		<table className="player-table">

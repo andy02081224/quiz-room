@@ -4,6 +4,8 @@ import { extend } from 'lodash';
 import classNames from 'classnames';
 
 const MultipleChoiceControl = function(props) {
+	let options = [];
+
 	function getClassName(value) {
 		let className = classNames({
 			'col-md-6': true,
@@ -15,16 +17,35 @@ const MultipleChoiceControl = function(props) {
 		return className;
 	}
 
+	function nextChar(c) {
+    return String.fromCharCode(c.charCodeAt(0) + 1);
+	}
+
+	function renderOptions() {
+		let options = [];
+		let row = [];
+
+		for (let i = 0, charCode = 97; i < props.optionCount; i++, charCode++) {
+			let optionIndentifier = String.fromCharCode(charCode);
+			let option = (<div 
+				className={getClassName(optionIndentifier)} 
+				data-value={optionIndentifier}>{optionIndentifier.toUpperCase()}</div>);
+
+			row.push(option);
+
+			if (i % 2 != 0 || (i % 2 == 0 && i == props.optionCount - 1)) {
+				options.push(React.createElement('div', {className: 'row'}, row));
+				row = [];
+			}
+		}
+
+		return options;
+	}
+
+
 	return (
 		<div className="answer-controller__control answer-controller__control--multiple" onClick={props.onValueChanged}>
-			<div className="row">
-				<div className={getClassName('a')} data-value="a">A</div>
-				<div className={getClassName('b')} data-value="b">B</div>
-			</div>
-			<div className="row">
-				<div className={getClassName('c')} data-value="c">C</div>
-				<div className={getClassName('d')} data-value="d">D</div>
-			</div>
+			{renderOptions()}
 		</div>
 	);
 };

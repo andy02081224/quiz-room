@@ -14,7 +14,7 @@
 	}, {
 		"type": "question-multiple",
 		"title": "When did World War II end",
-		"options": ["1925", "1935", "1945", "1955"],
-		"answer": "1945"
+		"options": ["a:1925", "b:1935", "c:1945", "d:1955"],
+		"answer": "c"
 	}]
 }
