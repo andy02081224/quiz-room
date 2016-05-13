@@ -24,7 +24,6 @@ class QuestionSlides extends React.Component {
 			center: true,
 			overview: false
 		});
-		console.log('initialize Reveal');
 
 		let firstSlideElement = document.querySelector('.slides > section[data-type]');
 		let firstSlide = this.getSlideWrappedObj(firstSlideElement, {

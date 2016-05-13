@@ -1,5 +1,7 @@
 import React from 'react';
 
+import ResultSlides from '../components/ResultSlides/ResultSlides.jsx';
+
 class MasterResultPage extends React.Component {
 	constructor(props) {
 		super(props);
@@ -10,6 +12,7 @@ class MasterResultPage extends React.Component {
 			playerCount: 2,
 			questionCount: 3,
 			questionSetName: "Question Set 1",
+			winner: 'player1',
 			playerStats: [{
 				id: '123',
 				name: 'player1',
@@ -28,7 +31,7 @@ class MasterResultPage extends React.Component {
 
 	render() {
 		return (
-			<div>MasterResultPage</div>
+			<ResultSlides gameResult={this.result} />
 		);
 	}
 }
