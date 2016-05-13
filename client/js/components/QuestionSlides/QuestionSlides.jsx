@@ -9,9 +9,9 @@ import QuestionSlide from './QuestionSlide.jsx';
 /* Styles */
 import '../../../../node_modules/reveal.js/css/reveal.css';
 import '../../../../node_modules/reveal.js/css/theme/solarized.css';
-import './Slides.scss';
+import './QuestionSlides.scss';
 
-class Slides extends React.Component {
+class QuestionSlides extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -24,6 +24,7 @@ class Slides extends React.Component {
 			center: true,
 			overview: false
 		});
+		console.log('initialize Reveal');
 
 		let firstSlideElement = document.querySelector('.slides > section[data-type]');
 		let firstSlide = this.getSlideWrappedObj(firstSlideElement, {
@@ -44,7 +45,6 @@ class Slides extends React.Component {
 	}
 
 	getSlideWrappedObj(slide, extendObj={}) {
-		console.log(slide);
 		let slideType = slide.getAttribute('data-type');
 		let optionCount = slide.querySelectorAll('ul > [data-identifier]').length;
 		
@@ -74,17 +74,6 @@ class Slides extends React.Component {
 	}
 
 	render() {
-		/**
-		 * Slide types:
-		 * 1.Starts with "INTRO": Intro slide
-		 * 2.Starts with "QUESTION": Question slide
-		 * 3.Starts with "RESULT": Result slide 
-		 */
-		
-		let questionTypes = Object.keys(this.props.slideTypes).filter((type) => {
-			return type.startsWith('QUESTION');
-		});
-
 		return (
 			<div className="reveal">
 				<div className="slides">
@@ -95,15 +84,14 @@ class Slides extends React.Component {
 						content={this.props.slidesData.description} 
 					/>
 					{this.renderQuestionSlides()}
-					<section>
-						<section data-type={this.props.slideTypes.RESULT}>v1</section>
-						<section data-type={this.props.slideTypes.RESULT}>v2</section>
-						<section data-type={this.props.slideTypes.RESULT}>v3</section>
-					</section>
+					<IntroSlide 
+						type={this.props.slideTypes.RESULT} 
+						title="Calculating result, please wait"
+					/>
 				</div>
 			</div>
 		);
 	}
 }
 
-export default Slides;
+export default QuestionSlides;

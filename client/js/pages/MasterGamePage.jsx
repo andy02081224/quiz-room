@@ -1,9 +1,10 @@
 import React from 'react';
 import Reveal from 'reveal.js';
 import { extend, find } from 'lodash';
+import { withRouter } from 'react-router';
 
 import PlayerTable from '../components/PlayerTable/PlayerTable.jsx';
-import Slides from '../components/Slides/Slides.jsx';
+import QuestionSlides from '../components/QuestionSlides/QuestionSlides.jsx';
 
 
 class MasterGamePage extends React.Component {
@@ -18,28 +19,14 @@ class MasterGamePage extends React.Component {
 			QUESTION_MULTIPLE: 'question-multiple',
 			RESULT: 'result'
 		};
-		// this.gameStats = {
-		// 	winner: null,
-		// 	players: this.props.location.state.players.map((player) => {
-		// 		return {
-		// 			id: player.id,
-		// 			name: player.playerName,
-		// 			score: 0
-		// 		};
-		// 	})
-		// };
 		this.state = {
 			slidesData: {
 				questions: []
-			},
-			gameState: {
-				isGameFinished: false
 			},
 			playerState: this.props.location.state.players.map((player) => {
 				return {
 					id: player.id,
 					name: player.playerName,
-					score: 0,
 					submitAnswer: false,
 					submittedAnswers: []
 				};
@@ -85,29 +72,34 @@ class MasterGamePage extends React.Component {
 		});
 	}
 
-	checkAnswer() {
-		console.log(this.state.playerState);
+	checkAnswerAndGetGameResult() {
 		let answers = this.state.slidesData.questions.map((question) => {
-			return question.answer;
+			return question.answer.split(':')[0];
 		});
 
-		console.log('Correct answers:', answers);
-		let updatedState = this.state.playerState.map((player) => {
-			console.log('Player answers:', player.submittedAnswers);
+		let gameResult = {
+			questionSetName: this.state.slidesData.title,
+			playerCount: this.state.playerState.length,
+			questionCount: answers.length
+		};
 
-			player.score = player.submittedAnswers.filter((answer, index) => {
+		gameResult.playerStats = this.state.playerState.map((player) => {
+			let stats = {};
+
+			stats.id = player.id;
+			stats.name = player.name;
+			stats.submittedAnswers = player.submittedAnswers;
+			stats.score = player.submittedAnswers.filter((answer, index) => {
 				return answer == answers[index].toString();
 			}).length;
 
-			return player;
+			return stats;
 		});
 
-		console.log(updatedState);
+		return gameResult;
 	}
 
 	handleSlideChange(slide) {
-		console.log('Slide:', slide);
-
 		if (slide.type == this.SLIDE_TYPES.INTRO) {
 			setTimeout(() => Reveal.next(), 3000);
 		}
@@ -128,7 +120,15 @@ class MasterGamePage extends React.Component {
 
 	handleGameFinish() {
 		console.log('game finish!');
-		this.checkAnswer();
+
+		let gameResult = this.checkAnswerAndGetGameResult();
+
+		this.props.router.push({
+			pathname: '/result',
+			state: {
+				result: gameResult
+			}
+		});
 	}
 
 	handleAllPlayerAnswer() {
@@ -155,10 +155,10 @@ class MasterGamePage extends React.Component {
 		return(
 			<div className="page page--master-game">
 				<PlayerTable playerState={this.state.playerState} onAllPlayerAnswer={this.handleAllPlayerAnswer} />
-				<Slides slidesData={this.state.slidesData} slideTypes={this.SLIDE_TYPES} onSlideChange={this.handleSlideChange} />
+				<QuestionSlides slidesData={this.state.slidesData} slideTypes={this.SLIDE_TYPES} onSlideChange={this.handleSlideChange} />
 			</div>
 		);
 	}
 }
 
-export default MasterGamePage;
+export default withRouter(MasterGamePage);

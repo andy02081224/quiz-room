@@ -44,6 +44,10 @@ app.get('/game', (req, res) => {
 	res.render('master');
 });
 
+app.get('/result', (req, res) => {
+	res.render('master');
+});
+
 app.get('/:gameId', (req, res) => {
 	let gameId = req.params.gameId;
 	socketServer.connectPeers(gameId, (error) => {
@@ -58,6 +62,19 @@ app.get('/:gameId', (req, res) => {
 });
 
 app.get('/:gameId/:playerName/game', (req, res) => {
+	let gameId = req.params.gameId;
+	socketServer.connectPeers(gameId, (error) => {
+		if (!error) {
+			// res.send(`connected to peers, room id: ${gameId}`);
+			res.render('controller');
+		}
+		else {
+			res.send('connection failed');
+		}
+	});
+});
+
+app.get('/:gameId/:playerName/result', (req, res) => {
 	let gameId = req.params.gameId;
 	socketServer.connectPeers(gameId, (error) => {
 		if (!error) {
