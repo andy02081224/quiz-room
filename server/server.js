@@ -94,7 +94,7 @@ let server = app.listen(3000, () => {
 socketServer.listen(server);
 
 if (devProxyServer && process.env.NODE_ENV == 'development') {
-	devProxyServer.listen(8080, '192.168.0.117', (err, result) => {
+	devProxyServer.listen(8080, '0.0.0.0', (err, result) => {
 		if (err) console.log(err);
 
 		console.log('Proxy server listening at localhost:8080')
