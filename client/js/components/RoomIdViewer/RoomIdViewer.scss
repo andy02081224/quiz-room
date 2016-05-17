@@ -1,15 +1,31 @@
 .roomId-viewer {
 	text-align: center;
+	display: inline-block;
 
 	&__header {
 		padding: 20px;
 	}
 
 	&__url {
-		padding: 10px;
+		padding: 15px;
+		position: relative;
 	}
 
+	// &__url::after {
+	// 	content: 'or';
+	// 	position: absolute;
+	// 	top: 100%;
+	// 	left: 50%;
+	// 	border: 1px solid black;
+	// 	border-radius: 50%;
+	// 	transform: translateX(-50%);
+	// }
+
 	&__qrcode {
-		padding: 10px;
+		padding: 15px;
+	}
+
+	&__qrcode img {
+		vertical-align: middle;
 	}
 }

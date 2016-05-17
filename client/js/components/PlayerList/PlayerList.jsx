@@ -13,7 +13,7 @@ const PlayerList = function(props) {
 				{players}
 			</ul>
 			<button 
-				className="player-list__game-start-btn" 
+				className="player-list__game-start-btn btn" 
 				onClick={props.onGameStartClicked}>
 				開始遊戲
 			</button>

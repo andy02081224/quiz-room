@@ -6,8 +6,10 @@ import Utils from '../utils/utils';
 import { browserHistory, withRouter } from 'react-router';
 
 /* Components */
+import Panel from '../components/Panel/Panel.jsx';
 import RoomIdViewer from '../components/RoomIdViewer/RoomIdViewer.jsx';
 import PlayerList from '../components/PlayerList/PlayerList.jsx';
+
 
 class MasterStartPage extends React.Component {
 	static defaultProps = {
@@ -67,9 +69,17 @@ class MasterStartPage extends React.Component {
 
 	render() {
 		return (
-			<div className="page page--master-start">
-				<RoomIdViewer roomId={this.props.roomId} />
-				<PlayerList players={this.state.players} onGameStartClicked={this.handleGameStartClicked}/>
+			<div className="page master-start-page">
+				<div className="container">
+					<div className="row">
+						<Panel className="col-md-6" header="請用瀏覽器開啟下列url或掃描條碼">
+							<RoomIdViewer roomId={this.props.roomId} />
+						</Panel>
+						<Panel className="col-md-6">
+							<PlayerList players={this.state.players} onGameStartClicked={this.handleGameStartClicked}/>
+						</Panel>
+					</div>
+				</div>
 			</div>
 		);
 	}

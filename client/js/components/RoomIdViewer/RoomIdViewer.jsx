@@ -9,7 +9,6 @@ const RoomIdViewer = function RoomIdViewer(props) {
 
 	return (
 		<div className="roomId-viewer">
-			<header className="roomId-viewer__header">請用瀏覽器開啟下列url或掃描條碼</header>
 			<section className="roomId-viewer__url"><span>{url}</span></section>
 			<section className="roomId-viewer__qrcode"><img src={qrcodeUrl} alt=""/></section>
 		</div>

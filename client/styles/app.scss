@@ -1,4 +1,5 @@
 /* 1. helpers */
+@import 'helpers/variables';
 
 /* 2. vendor */
 @import 'vendor/normalize';
@@ -6,6 +7,7 @@
 
 /* 3. base */
 @import 'base/base';
+@import 'base/typography';
 
 /* 4. layout */
 @import 'layout/layout';
@@ -14,3 +16,4 @@
 @import 'components/button';
 
 /* 6. pages */
+@import 'pages/masterStartPage';

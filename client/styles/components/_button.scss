@@ -1,4 +1,14 @@
 .btn {
-	border: none;
+	color: black;
+	border: 1px solid $color-concrete;
 	outline: none;
+	background-color: transparent;
+	padding: 10px 20px;
+	font-size: 2rem;
+}
+
+.btn:hover {
+	cursor: pointer;
+	color: white;
+	background-color: $color-concrete;
 }

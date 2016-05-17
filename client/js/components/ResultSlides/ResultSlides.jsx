@@ -6,7 +6,7 @@ import BoxScore from './BoxScore.jsx';
 
 /* Styles */
 import '../../../../node_modules/reveal.js/css/reveal.css';
-import '../../../../node_modules/reveal.js/css/theme/solarized.css';
+// import '../../../../node_modules/reveal.js/css/theme/sky.css';
 
 class ResultSlides extends React.Component {
 	constructor(props) {
