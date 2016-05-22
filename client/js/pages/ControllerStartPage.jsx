@@ -2,12 +2,16 @@ import React from 'react';
 import io from 'socket.io-client';
 import { browserHistory } from 'react-router';
 import swal from 'sweetalert';
+import classNames from 'classnames';
 import '../../../node_modules/sweetalert/dist/sweetalert.css';
 
 class ControllerStartPage extends React.Component {
 	constructor(props) {
 		super(props);
 		this.socket = this.props.route.socket;
+		this.state = {
+			hideInstruction: true
+		};
 	}
 
 	componentDidMount() {
@@ -20,7 +24,7 @@ class ControllerStartPage extends React.Component {
 				type: "input",
 				inputValue: `player-${this.socket.id.substring(0, 6)}`,  
 				closeOnConfirm: false,   
-				animation: "slide-from-top",   
+				animation: true,   
 				inputPlaceholder: 'Player Name' 
 			}, function(playerName) {   
 					if (playerName === "") {     
@@ -35,6 +39,9 @@ class ControllerStartPage extends React.Component {
 							playerName: playerName
 						});
 						swal.close();
+						this.setState({
+							hideInstruction: false
+						});
 					}
 
 
@@ -48,8 +55,16 @@ class ControllerStartPage extends React.Component {
 	}
 
 	render() {
+		let labelClass = classNames({
+			'hidden': this.state.hideInstruction
+		});
+
 		return (
-			<div className="page page--controller-start">controller page</div>
+			<div className="controller-start-page">
+				<label className={labelClass}>
+					<span>Waiting game to start</span>
+				</label>
+			</div>
 		);
 	}
 }

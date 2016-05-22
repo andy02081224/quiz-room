@@ -1,0 +1,13 @@
+.controller-start-page {
+	font-size: 3rem;
+	text-align: center;
+	height: 100%;
+
+	label {
+		padding: 0 15px;
+		position: relative;
+		display: block;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+}
