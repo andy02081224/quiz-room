@@ -69,13 +69,15 @@ class MasterStartPage extends React.Component {
 
 	render() {
 		return (
-			<div className="page master-start-page">
-				<div className="container">
+			<div className="master-start-page">
+				<div className="wrapper container">
 					<div className="row">
-						<Panel className="col-md-6" header="請用瀏覽器開啟下列url或掃描條碼">
+						<Panel className="col-md-6 col-md-offset-3" header="請用瀏覽器開啟下列url或掃描條碼">
 							<RoomIdViewer roomId={this.props.roomId} />
 						</Panel>
-						<Panel className="col-md-6">
+					</div>
+					<div className="row">
+						<Panel className="col-md-6 col-md-offset-3" header="已加入玩家">
 							<PlayerList players={this.state.players} onGameStartClicked={this.handleGameStartClicked}/>
 						</Panel>
 					</div>

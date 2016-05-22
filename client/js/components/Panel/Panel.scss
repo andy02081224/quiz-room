@@ -3,13 +3,15 @@ $color-asbestos: #7f8c8d;
 
 .panel {
 	background-color: $color-clouds;
-	box-shadow: 0 0 2px 1px darken($color-asbestos, 20%);
+	box-shadow: 1px 1px 2px 1px darken($color-asbestos, 15%);
 	font-size: 2rem;
 	border-radius: 1px;
+	margin-bottom: 20px;
 
 	&__header {
-		padding: 10px 15px;
+		padding: 12px 15px;
 		border-bottom: 1px solid $color-asbestos;
+		line-height: 1.2;
 	}
 
 	&__body {

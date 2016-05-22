@@ -9,8 +9,8 @@ const RoomIdViewer = function RoomIdViewer(props) {
 
 	return (
 		<div className="roomId-viewer">
-			<section className="roomId-viewer__url"><span>{url}</span></section>
-			<section className="roomId-viewer__qrcode"><img src={qrcodeUrl} alt=""/></section>
+			<div className="roomId-viewer__url">{url}</div>
+			<div className="roomId-viewer__qrcode"><img src={qrcodeUrl} alt=""/></div>
 		</div>
 	);
 };

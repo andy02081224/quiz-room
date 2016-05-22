@@ -12,7 +12,7 @@ import MasterResultPage from './pages/MasterResultPage.jsx';
 /* Styles */
 import '../styles/app.scss';
 
-let socket = io.connect('http://localhost:3000');
+let socket = io.connect(`${location.hostname}:3000`);
 
 ReactDOM.render((
 	<Router history={browserHistory}>

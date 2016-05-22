@@ -8,7 +8,6 @@ const PlayerList = function(props) {
 	// disabled={players.length < 2}
 	return (
 		<div className="player-list">
-			<header>已加入玩家</header>
 			<ul className="player-list__list">
 				{players}
 			</ul>

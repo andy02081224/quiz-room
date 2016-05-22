@@ -1,14 +1,9 @@
 .player-list {
 	text-align: center;
-	border: 1px solid black;
 	display: inline-block;
-	
-	> header {
-		padding: 20px;
-	}
 
 	&__list {
-		padding: 10px 0;
+		padding: 15px 0;
 		margin: 0;
 		list-style: none;
 	}
