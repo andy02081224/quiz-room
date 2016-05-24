@@ -73,7 +73,7 @@ class AnswerController extends React.Component {
 		let control = this.getDedicatedControl();
 
 		return (
-			<div className="container-fluid answer-controller">
+			<div className="answer-controller container-fluid">
 				{control}
 				<ConfirmButton onConfirmButtonClicked={this.handleConfirmButtonClicked} />
 			</div>

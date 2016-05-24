@@ -1,11 +1,13 @@
-$confirm-btn-height: 150px;
+@import '../../../styles/vendor/mq';
+
+$confirm-btn-height: 80px;
 $color-nephritis: #27ae60;
 $color-alizarin: #e74c3c;
 $color-peter-river: #3498db;
 
 .answer-controller {
 	height: 100%;
-	font-size: 10rem;
+	font-size: 8rem;
 	text-align: center;
 	position: relative;
 	padding-bottom: 100px;
@@ -13,14 +15,21 @@ $color-peter-river: #3498db;
 	&__control {
 		// height: calc(100% - 100px);
 		position: absolute;
-		width: 100%;
 		top: calc(50% - #{$confirm-btn-height / 2});
 		transform: translateY(-50%);
 	}
 
+	&__control--true-false {
+		width: 100%;
+	}
+
+	&__control--multiple {
+		width: calc(100% - 30px);
+	}
+
 	&__control &__control-option {
 		background-clip: content-box;
-		padding: 50px 15px;
+		padding: 20px 10px;
 	}
 
 	&__control &__control-option:hover {
@@ -28,8 +37,7 @@ $color-peter-river: #3498db;
 	}
 
 	&__control &__control-option--selected {
-		padding-top: 45px; 
-		border: 5px dashed black;
+		box-shadow: 0 0 0 3px black inset;
 	}
 
 	&__control-option[data-value="true"] {
@@ -46,6 +54,7 @@ $color-peter-river: #3498db;
 		position: absolute;
 		bottom: 0;
 		left: 0;
+		right: 0;
 		height: $confirm-btn-height;
 		width: 100%;
 	}
@@ -54,5 +63,9 @@ $color-peter-river: #3498db;
 		cursor: pointer;
 		background-color: $color-peter-river;
 		color: white;
+	}
+
+	@include mq($until: tablet) {
+		font-size: 4rem;
 	}
 }
