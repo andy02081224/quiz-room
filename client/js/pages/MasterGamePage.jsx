@@ -73,8 +73,14 @@ class MasterGamePage extends React.Component {
 	}
 
 	checkAnswerAndGetGameResult() {
+		console.log(this.state.slidesData.questions);
 		let answers = this.state.slidesData.questions.map((question) => {
-			return question.answer.split(':')[0];
+			if (question.type == 'question-multiple') {
+	 			return question.answer.split(':')[0];
+			}
+			else {
+				return question.answer;
+			}
 		});
 
 		let gameResult = {
@@ -122,6 +128,8 @@ class MasterGamePage extends React.Component {
 		console.log('game finish!');
 
 		let gameResult = this.checkAnswerAndGetGameResult();
+
+		this.socket.emit('gameFinish', gameResult);
 
 		this.props.router.push({
 			pathname: '/result',

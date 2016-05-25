@@ -26,6 +26,20 @@ class ControllerGamePage extends React.Component {
 				optionCount: data.optionCount
 			});
 		});
+
+		this.socket.on('gameFinish', (data) => {
+			console.log(data);
+			// {
+			// 	playerCount: 2,
+			// 	playerStats: [{
+			// 		id: 'woigjwi',
+			// 		name: 'andy',
+			// 		score: 3
+			// 	}],
+			// 	questionCount: 3,
+			// 	questionSetName: 'set 1'
+			// }
+		});
 	}
 
 	componentDidMount() {

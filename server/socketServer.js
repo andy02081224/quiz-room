@@ -55,8 +55,8 @@ socketServer.prototype.listen = function(server) {
 			this.io.to(data.roomId).emit('fromMaster', 'message from game master');
 		});
 
-		socket.on('lastSlide', (data) => {
-			
+		socket.on('gameFinish', (data) => {
+			this.io.to(socket.roomId).emit('gameFinish', data);
 		});
 
 		socket.on('disconnect', (data) => {

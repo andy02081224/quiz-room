@@ -3,7 +3,9 @@ import io from 'socket.io-client';
 import { browserHistory } from 'react-router';
 import swal from 'sweetalert';
 import classNames from 'classnames';
+
 import '../../../node_modules/sweetalert/dist/sweetalert.css';
+
 
 class ControllerStartPage extends React.Component {
 	constructor(props) {
