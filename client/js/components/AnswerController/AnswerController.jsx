@@ -1,10 +1,12 @@
 import React from 'react';
 import { extend } from 'lodash';
+import swal from 'sweetalert';
 
 import TrueFalseControl from './TrueFalseControl.jsx';
 import MultipleChoiceControl from './MultipleChoiceControl.jsx';
 import ConfirmButton from './ConfirmButton.jsx';
 
+import '../../../../node_modules/sweetalert/dist/sweetalert.css';
 import './AnswerController.scss';
 
 class AnswerController extends React.Component {
@@ -22,10 +24,11 @@ class AnswerController extends React.Component {
 
 	componentDidMount() {
 		this.socket.on('nextQuestion', (data) => {
-			console.log('nextQuestion');
 			this.setState({
 				currentValue: null
 			});	
+
+			swal.close();
 		});
 	}
 
@@ -67,6 +70,11 @@ class AnswerController extends React.Component {
 		this.socket.emit('submitAnswer', extend(this.props.player, {
 			answer: this.state.currentValue
 		}));
+
+		swal({
+			title: "Waiting other players",
+			showConfirmButton: false
+		});
 	}
 
 	render() {
