@@ -5,6 +5,7 @@ import swal from 'sweetalert';
 import TrueFalseControl from './TrueFalseControl.jsx';
 import MultipleChoiceControl from './MultipleChoiceControl.jsx';
 import ConfirmButton from './ConfirmButton.jsx';
+import FullscreenLabel from '../FullscreenLabel/FullscreenLabel.jsx';
 
 import '../../../../node_modules/sweetalert/dist/sweetalert.css';
 import './AnswerController.scss';
@@ -37,7 +38,7 @@ class AnswerController extends React.Component {
 
 		switch (this.props.questionType) {
 			case null:
-				control = <div>Loading</div>;
+				control = <FullscreenLabel title="Get Ready" />;
 				break;
 			case 'question-true-false':
 				control = (<TrueFalseControl 
@@ -53,7 +54,10 @@ class AnswerController extends React.Component {
 				/>);
 				break;
 			default:
-				control = <div>Something Wrong</div>;
+				control = (<FullscreenLabel 
+					title="Something went wrong" 
+					subtitle="Please contact the admin" 
+				/>);
 		}
 
 		return control;
@@ -67,6 +71,14 @@ class AnswerController extends React.Component {
 	}
 
 	handleConfirmButtonClicked() {
+		if (!this.state.currentValue) {
+			swal({
+				title: "Please choose an answer"
+			});
+
+			return;
+		}
+
 		this.socket.emit('submitAnswer', extend(this.props.player, {
 			answer: this.state.currentValue
 		}));
@@ -83,7 +95,9 @@ class AnswerController extends React.Component {
 		return (
 			<div className="answer-controller container-fluid">
 				{control}
-				<ConfirmButton onConfirmButtonClicked={this.handleConfirmButtonClicked} />
+				<div className={this.props.questionType ? '' : 'hidden'}>
+					<ConfirmButton onConfirmButtonClicked={this.handleConfirmButtonClicked} />
+				</div>
 			</div>
 		);
 	}

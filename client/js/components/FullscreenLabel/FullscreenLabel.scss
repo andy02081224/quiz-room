@@ -1,0 +1,33 @@
+@import '../../../styles/vendor/mq';
+
+$border-width: 2px;
+$text-color: #000000;
+
+.fs-label {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	padding: 10px;
+	transform: translate(-50%, -50%);
+	border-top: $border-width solid $text-color;
+	border-bottom: $border-width solid $text-color;
+	font-size: 4rem;
+	text-align: center;
+
+	&__title {
+		color: $text-color;
+	}
+
+	&__subtitle {
+		font-size: 0.5em;
+		color: lighten($text-color, 30%);
+	}
+
+	@include mq($from: mobile, $until: tablet) {
+		font-size: 2.5rem;
+	}
+
+	@include mq($until: mobile) {
+		font-size: 1.5rem;
+	}
+}

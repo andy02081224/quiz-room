@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router';
 import swal from 'sweetalert';
 import classNames from 'classnames';
 
+import FullscreenLabel from '../components/FullscreenLabel/FullscreenLabel.jsx';
 import '../../../node_modules/sweetalert/dist/sweetalert.css';
 
 
@@ -63,9 +64,9 @@ class ControllerStartPage extends React.Component {
 
 		return (
 			<div className="controller-start-page">
-				<label className={labelClass}>
-					<span>Waiting game to start</span>
-				</label>
+				<div className={labelClass}>
+					<FullscreenLabel title="Waiting game to start" />
+				</div>
 			</div>
 		);
 	}

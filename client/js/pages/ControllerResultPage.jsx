@@ -1,4 +1,5 @@
 import React from 'react';
+import FullscreenLabel from '../components/FullscreenLabel/FullscreenLabel.jsx';
 
 class ControllerResultPage extends React.Component {
 	constructor(props) {
@@ -28,7 +29,7 @@ class ControllerResultPage extends React.Component {
 
 	render() {
 		return (
-			<div>Result Page</div>
+			<FullscreenLabel title="Result Page" subtitle="Results Announcement" />
 		);
 	}
 }
