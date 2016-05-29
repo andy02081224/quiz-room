@@ -1,6 +1,8 @@
 import React from 'react';
-import AnswerController from '../components/AnswerController/AnswerController.jsx';
+import { browserHistory } from 'react-router'; 
 import io from 'socket.io-client';
+
+import AnswerController from '../components/AnswerController/AnswerController.jsx';
 
 class ControllerGamePage extends React.Component {
 	constructor(props) {
@@ -28,7 +30,8 @@ class ControllerGamePage extends React.Component {
 		});
 
 		this.socket.on('gameFinish', (data) => {
-			console.log(data);
+			browserHistory.push(`/${this.player.roomId}/${this.player.playerName}/result`);
+
 			// {
 			// 	playerCount: 2,
 			// 	playerStats: [{

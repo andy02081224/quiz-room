@@ -48,7 +48,7 @@ class ControllerStartPage extends React.Component {
 
 
 					this.socket.on('gameStart', (data) => {
-						if (data.gameStart) browserHistory.push(`${roomId}/${playerName}/game`);
+						if (data.gameStart) browserHistory.push(`/${roomId}/${playerName}/game`);
 					});
 
 			}.bind(this));
