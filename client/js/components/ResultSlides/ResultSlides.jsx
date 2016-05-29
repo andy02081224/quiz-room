@@ -25,6 +25,12 @@ class ResultSlides extends React.Component {
 			touch: false,
 			autoSlideMethod: Reveal.navigateRight
 		});
+
+		Reveal.addEventListener( 'fragmentshown', function(event) {
+		    if (event.fragment.className.indexOf('fragment--last') > -1) {
+					this.props.onAnnoucementFinish();
+		    }
+		}.bind(this));
 	}
 
 	render() {
@@ -33,9 +39,15 @@ class ResultSlides extends React.Component {
 			href: '#/box-score'
 		}];
 
+		let winners = this.props.gameResult.playerStats.filter((player) => {
+			return player.rank == 1;
+		});
+		let winnerNames = winners.map((winner) => winner.name);
+
+
 		return (
 			<div className="reveal">
-				<AnnouncementAnimation winner={this.props.gameResult.winner} links={links}>
+				<AnnouncementAnimation winnerNames={winnerNames} links={links}>
 					<section id="box-score">
 						<BoxScore playerStats={this.props.gameResult.playerStats} />
 					</section>

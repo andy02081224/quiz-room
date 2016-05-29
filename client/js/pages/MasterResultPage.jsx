@@ -8,6 +8,7 @@ class MasterResultPage extends React.Component {
 
 		this.socket = this.props.route.socket;
 		this.result = this.props.location.state.result;
+		this.handleAnnoumcementFinish = this.handleAnnoumcementFinish.bind(this);
 		// this.result = {
 		// 	playerCount: 2,
 		// 	questionCount: 3,
@@ -29,9 +30,13 @@ class MasterResultPage extends React.Component {
 		console.log(this.result);
 	}
 
+	handleAnnoumcementFinish() {
+		this.socket.emit('gameResult', this.result);
+	}
+
 	render() {
 		return (
-			<ResultSlides gameResult={this.result} />
+			<ResultSlides gameResult={this.result} onAnnoucementFinish={this.handleAnnoumcementFinish}/>
 		);
 	}
 }

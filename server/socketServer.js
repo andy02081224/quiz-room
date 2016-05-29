@@ -59,6 +59,10 @@ socketServer.prototype.listen = function(server) {
 			this.io.to(socket.roomId).emit('gameFinish', data);
 		});
 
+		socket.on('gameResult', (data) => {
+			this.io.to(socket.roomId).emit('gameResult', data);
+		});
+
 		socket.on('disconnect', (data) => {
 			let masterId = this.keyStore[socket.roomId];
 			
