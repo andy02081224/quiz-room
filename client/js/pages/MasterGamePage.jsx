@@ -73,7 +73,6 @@ class MasterGamePage extends React.Component {
 	}
 
 	checkAnswerAndGetGameResult() {
-		console.log(this.state.slidesData.questions);
 		let answers = this.state.slidesData.questions.map((question) => {
 			if (question.type == 'question-multiple') {
 	 			return question.answer.split(':')[0];
@@ -102,6 +101,32 @@ class MasterGamePage extends React.Component {
 			return stats;
 		});
 
+		gameResult.playerStats.sort(function sortByScore(a, b) {
+			a.score - b.score;
+		});
+
+		
+		let rank = 1;
+
+		gameResult.playerStats.forEach(function calculateRank(player, index) {
+			if (index == 0) {
+				player.rank = rank;
+				calculateRank.previousRank = player.rank;
+				calculateRank.previousScore = player.score;
+				return;
+			}
+
+			if (player.score == calculateRank.previousScore) {
+				player.rank = calculateRank.previousRank;
+				rank++;
+			}
+			else {
+				player.rank = ++rank;
+				calculateRank.previousScore = player.score;
+				calculateRank.previousRank = player.rank;
+			}
+		});
+
 		return gameResult;
 	}
 
@@ -120,6 +145,7 @@ class MasterGamePage extends React.Component {
 			this.currentQuestionType = slide.type;
 		}
 		else if (slide.type == this.SLIDE_TYPES.RESULT) {
+			this.socket.emit('gameFinish');
 			this.handleGameFinish();
 		}
 	}
@@ -128,8 +154,6 @@ class MasterGamePage extends React.Component {
 		console.log('game finish!');
 
 		let gameResult = this.checkAnswerAndGetGameResult();
-
-		this.socket.emit('gameFinish', gameResult);
 
 		this.props.router.push({
 			pathname: '/result',
