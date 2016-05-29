@@ -1,5 +1,5 @@
 import React from 'react';
-import { browserHistory } from 'react-router'; 
+import { browserHistory, withRouter } from 'react-router'; 
 import io from 'socket.io-client';
 
 import AnswerController from '../components/AnswerController/AnswerController.jsx';
@@ -30,8 +30,12 @@ class ControllerGamePage extends React.Component {
 		});
 
 		this.socket.on('gameFinish', (data) => {
-			browserHistory.push(`/${this.player.roomId}/${this.player.playerName}/result`);
-
+			this.props.router.push({
+				pathname: `/${this.player.roomId}/${this.player.playerName}/result`,
+				state: {
+					player: this.player
+				}
+			});
 			// {
 			// 	playerCount: 2,
 			// 	playerStats: [{
@@ -63,4 +67,4 @@ class ControllerGamePage extends React.Component {
 	}
 }
 
-export default ControllerGamePage;
+export default withRouter(ControllerGamePage);

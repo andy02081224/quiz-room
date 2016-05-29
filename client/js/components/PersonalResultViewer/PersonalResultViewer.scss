@@ -1,0 +1,35 @@
+$color-concrete: #95a5a6;
+
+.personal-result {
+	position: relative;
+	top: 50vh;
+	transform: translateY(-50%);
+	text-align: center;
+	font-size: 3rem;
+
+	&__seperator {
+		position: absolute;
+		left: 50%;
+		top: 25%;
+		width: 0;
+		height: 50%;
+		border: 2px dashed $color-concrete;
+	}
+
+	&__highlight {
+		font-size: 2em;
+	}
+
+	@media screen and (max-width: 1000px) {
+		&__seperator {
+			top: 50%;
+			left: 35%;
+			height: 0;
+			width: 30%;
+		}
+
+		section {
+			padding: 25px 0;
+		}
+	}
+}
