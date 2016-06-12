@@ -25,7 +25,7 @@ module.exports = {
 		loaders: [{
 			include: __dirscripts,
 			test: /\.jsx?$/,
-			loader: 'babel-loader'
+			loaders: ['babel-loader', 'strip-loader?strip[]=console.log']
 		}, {
 			test: /\.(css|scss)$/,
 			loaders: ['style', 'css?sourceMap&minimize', 'postcss', 'sass?sourceMap']
@@ -61,6 +61,8 @@ module.exports = {
     new CopyWebpackPlugin([{
         from: path.resolve(__dirclient, 'views'),
         to: path.resolve(__dirbuild, 'views'),
+    }, {
+        from: path.resolve(__dirclient, 'temp.json')
     }])
 	],
 	postcss: function() {
