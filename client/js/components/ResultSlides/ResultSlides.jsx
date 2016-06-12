@@ -27,9 +27,9 @@ class ResultSlides extends React.Component {
 		});
 
 		Reveal.addEventListener( 'fragmentshown', function(event) {
-		    if (event.fragment.className.indexOf('fragment--last') > -1) {
-					this.props.onAnnoucementFinish();
-		    }
+			if (event.fragment.className.indexOf('fragment--last') > -1) {
+				this.props.onAnnoucementFinish();
+			}
 		}.bind(this));
 	}
 

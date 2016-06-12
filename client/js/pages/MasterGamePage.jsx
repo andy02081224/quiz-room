@@ -75,7 +75,7 @@ class MasterGamePage extends React.Component {
 	checkAnswerAndGetGameResult() {
 		let answers = this.state.slidesData.questions.map((question) => {
 			if (question.type == 'question-multiple') {
-	 			return question.answer.split(':')[0];
+				return question.answer.split(':')[0];
 			}
 			else {
 				return question.answer;
