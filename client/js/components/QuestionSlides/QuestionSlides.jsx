@@ -8,7 +8,7 @@ import QuestionSlide from './QuestionSlide.jsx';
 
 /* Styles */
 import '../../../../node_modules/reveal.js/css/reveal.css';
-import '../../../../node_modules/reveal.js/css/theme/sky.css';
+import '../../../../node_modules/reveal.js/css/theme/black.css';
 import './QuestionSlides.scss';
 
 class QuestionSlides extends React.Component {

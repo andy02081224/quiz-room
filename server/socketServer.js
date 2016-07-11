@@ -2,7 +2,7 @@
 
 let io = require('socket.io');
 
-let socketServer = function() {
+function socketServer() {
 	this.keyStore = {};
 	this.io = null;
 };

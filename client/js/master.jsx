@@ -6,6 +6,7 @@ import io from 'socket.io-client';
 
 /* Components */
 import MasterStartPage from './pages/MasterStartPage.jsx';
+import MasterRegisterPage from './pages/MasterRegisterPage.jsx';
 import MasterGamePage from './pages/MasterGamePage.jsx';
 import MasterResultPage from './pages/MasterResultPage.jsx';
 
@@ -17,6 +18,7 @@ let socket = io.connect(`${location.hostname}:3000`);
 ReactDOM.render((
 	<Router history={browserHistory}>
 		<Route path="/" socket={socket} component={MasterStartPage}></Route>
+		<Route path="/register" socket={socket} component={MasterRegisterPage}></Route>
 		<Route path="/game" socket={socket} component={MasterGamePage}></Route>
 		<Route path="/result" socket={socket} component={MasterResultPage}></Route>
 	</Router>
