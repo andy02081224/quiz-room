@@ -1,14 +1,24 @@
-const mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-const QuestionSetSchema = mongoogse.Schema({
+let QuestionSetSchema = mongoose.Schema({
 	title: String,
 	subtitle: String,
 	description: String,
 	questions:[{
-		type: String,
+		type: {type: String},
 		title: String,
+		options: [String],
 		answer: String
 	}]
 });
 
-module.export = mongoogse.model('QuestionSet', QuestionSetSchema);
+/* Static Methods */
+QuestionSetSchema.statics.getQuestionSetList = function(cb) {
+	this.find({}).select('-__v').exec(cb);
+};
+
+
+/* Instance Methods */
+
+
+module.exports = mongoose.model('QuestionSet', QuestionSetSchema);
