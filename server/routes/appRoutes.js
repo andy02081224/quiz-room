@@ -20,6 +20,7 @@ router.get('/result', (req, res) => {
 
 router.get('/:gameId', (req, res) => {
 	let gameId = req.params.gameId;
+	console.log('connect peer!!!: ', gameId);
 	logicController.connectPeers(gameId, (error) => {
 		if (!error) {
 			// res.send(`connected to peers, room id: ${gameId}`);

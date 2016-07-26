@@ -77,7 +77,7 @@ socketServer.prototype.listen = function(server) {
 };
 
 socketServer.prototype.connectPeers = function(key, cb) {
-
+	console.log('keyStore:', this.keyStore);
 	if (key in this.keyStore) {
 		cb(false);
 		// this.io.to(this.keyStore[key]).emit('fromPeer', 'hi');

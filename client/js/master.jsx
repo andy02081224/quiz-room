@@ -33,7 +33,7 @@ ReactDOM.render((
 	<Router history={browserHistory}>
 		<Route path="/" component={app}>
 			<IndexRoute socket={socket} component={MasterStartPage} />
-			<Route path="register" socket={socket} component={MasterRegisterPage} />
+			<Route path="register/:id" socket={socket} component={MasterRegisterPage} />
 			<Route path="game" socket={socket} component={MasterGamePage} />
 			<Route path="result" socket={socket} component={MasterResultPage} />
 		</Route>

@@ -22,44 +22,63 @@ class MasterRegisterPage extends React.Component {
 		this.handleGameStartClicked = this.handleGameStartClicked.bind(this);
 		this.socket = this.props.route.socket;
 		this.state = {
-			players: []
+			players: [],
+			questionSet: {}
 		};
 	}
 
 	componentDidMount() {
-		// this.socket = io.connect('http://localhost:3000');
+		this.loadQuestionSet();
 
-		this.socket.on('connect', () => {
-			this.socket.emit('roomId', {roomId: this.props.roomId});
+		this.socket.emit('roomId', {roomId: this.props.roomId});
 
-			this.socket.on('addPlayer', (data) => {
-				this.setState({
-					players: this.state.players.concat([data])
-				});
-			});
-
-			this.socket.on('playerLeave', (data) => {
-				console.log(`Player ${data.playerName} has left!`);
-
-				// Find left player and remove it from player list
-				this.setState({
-					players: this.state.players.filter((player) => player.id != data.id)
-				});
-			});
-
-			this.socket.on('gameStart', (data) => {
-				// if (data.gameStart) browserHistory.push('/game');
-				if (data.gameStart) {
-					this.props.router.push({
-						pathname: '/game',
-						state: {
-							players: this.state.players
-						}
-					});
-				}
+		this.socket.on('addPlayer', (data) => {
+			this.setState({
+				players: this.state.players.concat([data])
 			});
 		});
 
+		this.socket.on('playerLeave', (data) => {
+			console.log(`Player ${data.playerName} has left!`);
+
+			// Find left player and remove it from player list
+			this.setState({
+				players: this.state.players.filter((player) => player.id != data.id)
+			});
+		});
+
+		this.socket.on('gameStart', (data) => {
+			// if (data.gameStart) browserHistory.push('/game');
+			if (data.gameStart) {
+				this.props.router.push({
+					pathname: '/game',
+					state: {
+						questionSet: this.state.questionSet,
+						players: this.state.players
+					}
+				});
+			}
+		});
+	}
+
+	loadQuestionSet() {
+		fetch(`/api/questionset/${this.props.params.id}`)
+			.then((response) => {
+				return response.text();
+			})
+			.then((body) => {
+				return body;
+			})
+			.then((json) => {
+				let questionSet = JSON.parse(json);
+
+				this.setState({
+					questionSet: questionSet
+				})
+			})
+			.catch((err) => {
+				throw err;
+			});
 	}
 
 	handleGameStartClicked() {

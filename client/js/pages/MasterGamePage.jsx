@@ -19,10 +19,9 @@ class MasterGamePage extends React.Component {
 			QUESTION_MULTIPLE: 'question-multiple',
 			RESULT: 'result'
 		};
+
+
 		this.state = {
-			slidesData: {
-				questions: []
-			},
 			playerState: this.props.location.state.players.map((player) => {
 				return {
 					id: player.id,
@@ -73,7 +72,7 @@ class MasterGamePage extends React.Component {
 	}
 
 	checkAnswerAndGetGameResult() {
-		let answers = this.state.slidesData.questions.map((question) => {
+		let answers = this.props.location.state.questionSet.questions.map((question) => {
 			if (question.type == 'question-multiple') {
 				return question.answer.split(':')[0];
 			}
@@ -83,7 +82,7 @@ class MasterGamePage extends React.Component {
 		});
 
 		let gameResult = {
-			questionSetName: this.state.slidesData.title,
+			questionSetName: this.props.location.state.questionSet.title,
 			playerCount: this.state.playerState.length,
 			questionCount: answers.length
 		};
@@ -94,6 +93,8 @@ class MasterGamePage extends React.Component {
 			stats.id = player.id;
 			stats.name = player.name;
 			stats.submittedAnswers = player.submittedAnswers;
+			console.log('submittedAnswers:', player.submittedAnswers);
+			console.log('answers:', answers);
 			stats.score = player.submittedAnswers.filter((answer, index) => {
 				return answer == answers[index].toString();
 			}).length;
@@ -179,7 +180,7 @@ class MasterGamePage extends React.Component {
 	}
 
 	componentDidMount() {
-		this.loadSlidesDataFromServer();
+		// this.loadSlidesDataFromServer();
 		this.registerSocketEvents();
 	}
 
@@ -187,7 +188,7 @@ class MasterGamePage extends React.Component {
 		return(
 			<div className="page page--master-game">
 				<PlayerTable playerState={this.state.playerState} onAllPlayerAnswer={this.handleAllPlayerAnswer} />
-				<QuestionSlides slidesData={this.state.slidesData} slideTypes={this.SLIDE_TYPES} onSlideChange={this.handleSlideChange} />
+				<QuestionSlides slidesData={this.props.location.state.questionSet} slideTypes={this.SLIDE_TYPES} onSlideChange={this.handleSlideChange} />
 			</div>
 		);
 	}
