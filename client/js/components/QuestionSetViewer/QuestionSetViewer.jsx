@@ -4,6 +4,10 @@ import { Link } from 'react-router';
 
 import './QuestionSetViewer.scss';
 
+/* Images */
+import testImg from '../../../img/icons/temp.svg';
+// import testImg from '../../../img/sc.jpg';
+
 class QuestionSetViewer extends React.Component {
 	constructor(props) {
 		super(props);
@@ -17,14 +21,19 @@ class QuestionSetViewer extends React.Component {
 
 		this.props.questionSetList.forEach((questionSet, index) => {
 			questionRow.push((
-				<article className="col-md-3" key={questionSet._id}>
-					<Link to={`/register/${questionSet._id}`}>
-						<header>
-							<div>{questionSet.title}</div>
-							<div>{questionSet.subtitle}</div>
-						</header>
-					</Link>
-				</article>
+				<div className="col-md-4">
+					<article className="questionset-viewer__question-set" key={questionSet._id}>
+						<Link to={`/register/${questionSet._id}`}>
+							<div className="questionset-viewer__question-set-image">
+								<img src={testImg} alt=""/>
+							</div>
+							<header className="questionset-viewer__question-set-header">
+								<div className="questionset-viewer__question-set-title">{questionSet.title}</div>
+								<div className="questionset-viewer__question-set-subtitle">{questionSet.subtitle}</div>
+							</header>
+						</Link>
+					</article>
+				</div>
 			));
 
 			if (questionRow.length % 3 == 0 || index == lastElementIndex) {

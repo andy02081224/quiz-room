@@ -9,7 +9,9 @@ class SiteHeader extends React.Component {
 	render() {
 		return (
 			<header className="site-header">
-				<div>{this.props.logo}</div>
+				<div className="content-wrapper">
+					<div>{this.props.logo}</div>
+				</div>
 			</header>
 		);
 	}

@@ -41,8 +41,9 @@ class MasterStartPage extends React.Component {
 	render() {
 		return (
 			<div className="page page--master-start">
-				<SiteTitle title="Quiz Room" />
-				<QuestionSetViewer questionSetList={this.state.questionSetList} />
+				<div className="content-wrapper">
+					<QuestionSetViewer questionSetList={this.state.questionSetList} />
+				</div>
 			</div>
 		);
 	}
