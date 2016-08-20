@@ -1,16 +1,13 @@
-$color-clouds: #ecf0f1;
-$color-asbestos: #7f8c8d;
-
 .panel {
-	background-color: $color-clouds;
-	box-shadow: 1px 1px 1px 1px darken($color-asbestos, 10%);
+	background-color: #fff;
+	border: 1px solid #dbdbdb;
 	font-size: 2rem;
 	border-radius: 1px;
 	margin-bottom: 20px;
 
 	&__header {
 		padding: 12px 15px;
-		border-bottom: 1px solid $color-asbestos;
+		border-bottom: 1px solid #dbdbdb;
 		line-height: 1.2;
 	}
 
