@@ -20,6 +20,10 @@
 
 .content-wrapper {
 	padding: 0 20px;
+
+	@media screen and (max-width: 400px) {
+		padding: 0 5px;
+	}
 }
 
 .site-content {

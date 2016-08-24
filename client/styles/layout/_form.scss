@@ -1,0 +1,14 @@
+.form-group:not(:last-of-type) {
+	margin-bottom: 15px;
+}
+
+.form-group label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.form-input {
+	display: block;
+	border: 1px solid #dbdbdb;
+	width: 100%;
+}

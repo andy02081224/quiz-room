@@ -40,7 +40,7 @@ class MasterStartPage extends React.Component {
 
 	render() {
 		return (
-			<div className="page page--master-start">
+			<div className="page master-start-page">
 				<div className="content-wrapper">
 					<QuestionSetViewer questionSetList={this.state.questionSetList} />
 				</div>

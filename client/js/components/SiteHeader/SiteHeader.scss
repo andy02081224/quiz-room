@@ -9,6 +9,28 @@
 	background-color: #fff;
 
   &__logo {
-		font-size: 2.5em;
+  	float: left;
+  }
+
+  &__nav {
+		float: right;
+  }
+
+  &__nav ul {
+		list-style: none;
+		margin: 0;
+  }
+
+  &__nav li {
+		display: inline-block;
+  }
+
+   &__nav li:not(:last-child) {
+		margin-right: 15px;
+  }
+
+  &__nav li a {
+  	color: inherit;
+		text-decoration: none;
   }
 }

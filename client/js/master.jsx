@@ -10,6 +10,7 @@ import SiteContent from './components/SiteContent/SiteContent.jsx';
 
 
 /* Page Components */
+import LoginPage from './pages/LoginPage.jsx';
 import MasterStartPage from './pages/MasterStartPage.jsx';
 import MasterRegisterPage from './pages/MasterRegisterPage.jsx';
 import MasterGamePage from './pages/MasterGamePage.jsx';
@@ -36,6 +37,7 @@ ReactDOM.render((
 			<Route path="register/:id" socket={socket} component={MasterRegisterPage} />
 			<Route path="game" socket={socket} component={MasterGamePage} />
 			<Route path="result" socket={socket} component={MasterResultPage} />
+			<Route path="login" socket={socket} component={LoginPage} />
 		</Route>
 	</Router>
 ), document.getElementById('app'));

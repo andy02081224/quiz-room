@@ -4,11 +4,15 @@
 	outline: none;
 	background-color: transparent;
 	padding: 10px 20px;
-	font-size: 2rem;
+	// font-size: 2rem;
 }
 
 .btn:hover {
 	cursor: pointer;
 	color: white;
 	background-color: $color-concrete;
+}
+
+.btn-block {
+	width: 100%;
 }
