@@ -3,7 +3,7 @@ import './RoomIdViewer.scss';
 
 const RoomIdViewer = function RoomIdViewer(props) {
 	const qrcodeAPI = 'https://api.qrserver.com/v1/create-qr-code/?';
-	let url = `${location.origin}/${props.roomId}`;
+	let url = `${location.origin}/room/${props.roomId}`;
 	let encodedUrl = encodeURIComponent(url);
 	let qrcodeUrl = `${qrcodeAPI}size=${props.qrcodeSize}x${props.qrcodeSize}&data=${encodedUrl}`;
 

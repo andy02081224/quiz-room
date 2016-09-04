@@ -14,7 +14,6 @@ class QuestionSetViewer extends React.Component {
   }
 
   renderQuestionSets() {
-    console.log(this.props.questionSetList);
     let lastElementIndex = this.props.questionSetList.length - 1;
     let questionSets = [];
     let questionRow = [];
@@ -29,8 +28,8 @@ class QuestionSetViewer extends React.Component {
       };
 
       questionRow.push((
-        <div className="col-md-4">
-					<article className="questionset-viewer__question-set" key={questionSet._id}>
+        <div className="col-md-4" key={questionSet._id}>
+					<article className="questionset-viewer__question-set">
 						<Link to={`/register/${questionSet._id}`}>
 							<div className="questionset-viewer__question-set-image" style={questionSetBGImageStyle}></div>
 							<header className="questionset-viewer__question-set-header">
@@ -43,7 +42,7 @@ class QuestionSetViewer extends React.Component {
       ));
 
       if (questionRow.length % 3 == 0 || index == lastElementIndex) {
-        let newRow = React.createElement('div', { className: 'row' }, questionRow);
+        let newRow = React.createElement('div', { className: 'row', key: (questionRow.length / 3) }, questionRow);
         questionSets.push(newRow);
         questionRow = [];
       }

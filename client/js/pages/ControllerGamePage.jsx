@@ -16,13 +16,17 @@ class ControllerGamePage extends React.Component {
 		this.socket = this.props.route.socket;
 		this.player = {
 			id: this.socket.id,
-			playerName: this.props.params.playerName,
-			roomId: this.props.params.roomId
+			playerName: this.props.location.state.playerName,
+			roomID: this.props.location.state.roomID
 		};
 	}
 
+	componentDidMount() {
+		this.registerSocketEvents();
+	}
+
 	registerSocketEvents() {
-		this.socket.on('questionChange', (data) => {
+		this.socket.on('changeQuestionType', (data) => {
 			this.setState({
 				questionType: data.questionType,
 				optionCount: data.optionCount
@@ -31,7 +35,7 @@ class ControllerGamePage extends React.Component {
 
 		this.socket.on('gameFinish', (data) => {
 			this.props.router.push({
-				pathname: `/${this.player.roomId}/${this.player.playerName}/result`,
+				pathname: `/room/${this.player.roomID}/result`,
 				state: {
 					player: this.player
 				}
@@ -47,10 +51,6 @@ class ControllerGamePage extends React.Component {
 			// 	questionSetName: 'set 1'
 			// }
 		});
-	}
-
-	componentDidMount() {
-		this.registerSocketEvents();
 	}
 
 	render() {

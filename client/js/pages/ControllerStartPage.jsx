@@ -1,60 +1,74 @@
+/* Libs */
 import React from 'react';
 import io from 'socket.io-client';
-import { browserHistory } from 'react-router';
-import swal from 'sweetalert';
+import sw from 'sweetalert';
 import classNames from 'classnames';
+import { withRouter } from 'react-router';
 
+/* Components */
 import FullscreenLabel from '../components/FullscreenLabel/FullscreenLabel.jsx';
-import '../../../node_modules/sweetalert/dist/sweetalert.css';
 
 
 class ControllerStartPage extends React.Component {
 	constructor(props) {
 		super(props);
-		this.socket = this.props.route.socket;
+
 		this.state = {
 			hideInstruction: true
 		};
+
+		this.handlePlayerNameConfirm = this.handlePlayerNameConfirm.bind(this);
+
+		this.socket = this.props.route.socket;
 	}
 
 	componentDidMount() {
-		let roomId = location.pathname.substring(1);
+		this.registerSocketEvents();
+	}
 
-
+	registerSocketEvents() {
 		this.socket.on('connect', () => {
-			swal({   
+			sw({   
 				title: "請輸入名稱:",   
 				type: "input",
 				inputValue: `player-${this.socket.id.substring(0, 6)}`,  
 				closeOnConfirm: false,   
 				animation: true,   
-				inputPlaceholder: 'Player Name' 
-			}, function(playerName) {   
-					if (playerName === "") {     
-						swal.showInputError("You need to write something!");     
-						return false;   
-					}      
+				inputPlaceholder: '玩家姓名' 
+			}, this.handlePlayerNameConfirm);
+		});
+	}
 
-					if (playerName) {
-						this.socket.emit('pair', {
-							roomId: roomId,
-							id: this.socket.id,
-							playerName: playerName
-						});
-						swal.close();
-						this.setState({
-							hideInstruction: false
-						});
-					}
+	handlePlayerNameConfirm(playerName) {
+		let roomID = location.pathname.match(/\/room\/(\w{6})/)[1];
 
-
-					this.socket.on('gameStart', (data) => {
-						if (data.gameStart) browserHistory.push(`/${roomId}/${playerName}/game`);
-					});
-
-			}.bind(this));
+		this.socket.on('startGame', (data) => {
+			this.props.router.push({
+				pathname: `/room/${roomID}/game`,
+				state: {
+					roomID: roomID,
+					playerName: playerName
+				}
+			});
+			// browserHistory.push(`/${roomID}/${playerName}/game`);
 		});
 
+		if (!playerName.trim()) {     
+			sw.showInputError("請輸入玩家姓名!");     
+			return false;   
+		}      
+
+		this.socket.emit('joinRoom', {
+			roomID: roomID,
+			id: this.socket.id,
+			playerName: playerName
+		});
+
+		sw.close();
+
+		this.setState({
+			hideInstruction: false
+		});
 	}
 
 	render() {
@@ -72,4 +86,4 @@ class ControllerStartPage extends React.Component {
 	}
 }
 
-export default ControllerStartPage;
+export default withRouter(ControllerStartPage);

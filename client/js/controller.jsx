@@ -16,8 +16,8 @@ let socket = io.connect(`${location.hostname}:3000`);
 
 ReactDOM.render((
 	<Router history={browserHistory}>
-		<Route path="/:roomId" socket={socket} component={ControllerStartPage}></Route>
-		<Route path="/:roomId/:playerName/game" socket={socket} component={ControllerGamePage}></Route>
-		<Route path="/:roomId/:playerName/result" socket={socket} component={ControllerResultPage}></Route>
+		<Route path="/room/:roomId" socket={socket} component={ControllerStartPage}></Route>
+		<Route path="/room/:roomId/game" socket={socket} component={ControllerGamePage}></Route>
+		<Route path="/room/:roomId/result" socket={socket} component={ControllerResultPage}></Route>
 	</Router>
 ), document.getElementById('app'));

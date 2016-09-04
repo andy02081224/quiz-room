@@ -11,17 +11,8 @@ class MasterGamePage extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.currentQuestionType = null;
-		this.socket = this.props.route.socket;
-		this.SLIDE_TYPES = {
-			INTRO: 'intro',
-			QUESTION_TRUE_FALSE: 'question-true-false',
-			QUESTION_MULTIPLE: 'question-multiple',
-			RESULT: 'result'
-		};
-
-
 		this.state = {
+			slidesData: this.props.location.state.questionSet,
 			playerState: this.props.location.state.players.map((player) => {
 				return {
 					id: player.id,
@@ -34,25 +25,23 @@ class MasterGamePage extends React.Component {
 
 		this.handleSlideChange = this.handleSlideChange.bind(this);
 		this.handleAllPlayerAnswer = this.handleAllPlayerAnswer.bind(this);
+
+		this.currentQuestionType = null;
+		this.socket = this.props.route.socket;
+		this.SLIDE_TYPES = {
+			INTRO: 'intro',
+			QUESTION_TRUE_FALSE: 'question-true-false',
+			QUESTION_MULTIPLE: 'question-multiple',
+			RESULT: 'result'
+		};
 	}
 
-	loadSlidesDataFromServer() {
-		fetch('/temp.json')
-			.then((response) => {
-				return response.json();
-			})
-			.then((data) => {
-				this.setState({
-					slidesData: data
-				});
-			})
-			.catch();
+	componentDidMount() {
+		this.registerSocketEvents();
 	}
 
 	registerSocketEvents() {
 		this.socket.on('receiveAnswer', (data) => {
-			console.log('receiveAnswer:', data);
-
 			let updatedState = this.state.playerState.map((player) => {
 				if (player.id == data.id) {
 					player.submittedAnswers.push(data.answer);
@@ -137,7 +126,7 @@ class MasterGamePage extends React.Component {
 		}
 		else if (slide.isQuestionSlide) {
 			if (this.currentQuestionType != slide.type) {
-				this.socket.emit('questionChange', {
+				this.socket.emit('changeQuestionType', {
 					questionType: slide.type,
 					optionCount: slide.optionCount
 				});
@@ -165,8 +154,6 @@ class MasterGamePage extends React.Component {
 	}
 
 	handleAllPlayerAnswer() {
-		console.log('All player answered!');
-
 		this.setState({
 			playerState: this.state.playerState.map((player) => {
 				return extend(player, {
@@ -177,11 +164,6 @@ class MasterGamePage extends React.Component {
 
 		this.socket.emit('nextQuestion', true);
 		Reveal.next();
-	}
-
-	componentDidMount() {
-		// this.loadSlidesDataFromServer();
-		this.registerSocketEvents();
 	}
 
 	render() {
