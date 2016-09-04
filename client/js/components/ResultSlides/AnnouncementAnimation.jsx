@@ -30,7 +30,7 @@ const AnnouncementAnimation = function(props) {
 			<section data-autoslide="2000">
 				<section data-transition="zoom-in slide-out"> 
 					<header className="fragment" data-autoslide="1000">{winnerNames}</header>
-					<p className="fragment fragment--last">{addtionalLinks}</p>
+					<p className="fragment fragment--last result-slides__links">{addtionalLinks}</p>
 				</section>
 				{props.children}
 			</section>

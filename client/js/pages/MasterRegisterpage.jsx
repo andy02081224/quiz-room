@@ -41,6 +41,7 @@ class MasterRegisterPage extends React.Component {
 	loadQuestionSet() {
 		getQuestionSet(this.props.params.id)
 			.then((response) => {
+				console.log(response);
 				this.questionSet = response;
 				this.setState({
 					status: 'ready'

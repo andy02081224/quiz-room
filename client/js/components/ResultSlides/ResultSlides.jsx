@@ -6,7 +6,8 @@ import BoxScore from './BoxScore.jsx';
 
 /* Styles */
 import '../../../../node_modules/reveal.js/css/reveal.css';
-// import '../../../../node_modules/reveal.js/css/theme/sky.css';
+import './ResultSlides.scss';
+
 
 class ResultSlides extends React.Component {
 	constructor(props) {
@@ -34,11 +35,6 @@ class ResultSlides extends React.Component {
 	}
 
 	render() {
-		let links = [{
-			title: 'Box Score',
-			href: '#/box-score'
-		}];
-
 		let winners = this.props.gameResult.playerStats.filter((player) => {
 			return player.rank == 1;
 		});
@@ -46,8 +42,8 @@ class ResultSlides extends React.Component {
 
 
 		return (
-			<div className="reveal">
-				<AnnouncementAnimation winnerNames={winnerNames} links={links}>
+			<div className="reveal result-slides">
+				<AnnouncementAnimation winnerNames={winnerNames} links={this.props.links}>
 					<section id="box-score">
 						<BoxScore playerStats={this.props.gameResult.playerStats} />
 					</section>

@@ -6,9 +6,11 @@ class MasterResultPage extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.socket = this.props.route.socket;
-		this.result = this.props.location.state.result;
 		this.handleAnnoumcementFinish = this.handleAnnoumcementFinish.bind(this);
+		
+		this.socket = this.props.route.socket;
+		this.questionSetID = this.props.location.state.questionSetID;
+		this.result = this.props.location.state.result;
 		// this.result = {
 		// 	playerCount: 2,
 		// 	questionCount: 3,
@@ -35,8 +37,23 @@ class MasterResultPage extends React.Component {
 	}
 
 	render() {
+		let links = [{
+			title: 'Box Score',
+			href: '#/box-score'
+		}, {
+			title: 'Replay',
+			href: `/register/${this.questionSetID}`
+		}, {
+			title: 'Home',
+			href: '/'
+		}];
+
 		return (
-			<ResultSlides gameResult={this.result} onAnnoucementFinish={this.handleAnnoumcementFinish}/>
+			<ResultSlides 
+				links={links}
+				gameResult={this.result} 
+				onAnnoucementFinish={this.handleAnnoumcementFinish}
+			/>
 		);
 	}
 }

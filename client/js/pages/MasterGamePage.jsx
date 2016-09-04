@@ -12,7 +12,6 @@ class MasterGamePage extends React.Component {
 		super(props);
 
 		this.state = {
-			slidesData: this.props.location.state.questionSet,
 			playerState: this.props.location.state.players.map((player) => {
 				return {
 					id: player.id,
@@ -26,6 +25,7 @@ class MasterGamePage extends React.Component {
 		this.handleSlideChange = this.handleSlideChange.bind(this);
 		this.handleAllPlayerAnswer = this.handleAllPlayerAnswer.bind(this);
 
+		this.questionSet = this.props.location.state.questionSet;
 		this.currentQuestionType = null;
 		this.socket = this.props.route.socket;
 		this.SLIDE_TYPES = {
@@ -61,7 +61,7 @@ class MasterGamePage extends React.Component {
 	}
 
 	checkAnswerAndGetGameResult() {
-		let answers = this.props.location.state.questionSet.questions.map((question) => {
+		let answers = this.questionSet.questions.map((question) => {
 			if (question.type == 'question-multiple') {
 				return question.answer.split(':')[0];
 			}
@@ -71,7 +71,7 @@ class MasterGamePage extends React.Component {
 		});
 
 		let gameResult = {
-			questionSetName: this.props.location.state.questionSet.title,
+			questionSetName: this.questionSet.title,
 			playerCount: this.state.playerState.length,
 			questionCount: answers.length
 		};
@@ -148,6 +148,7 @@ class MasterGamePage extends React.Component {
 		this.props.router.push({
 			pathname: '/result',
 			state: {
+				questionSetID: this.questionSet._id,
 				result: gameResult
 			}
 		});
@@ -170,7 +171,7 @@ class MasterGamePage extends React.Component {
 		return(
 			<div className="page page--master-game">
 				<PlayerTable playerState={this.state.playerState} onAllPlayerAnswer={this.handleAllPlayerAnswer} />
-				<QuestionSlides slidesData={this.props.location.state.questionSet} slideTypes={this.SLIDE_TYPES} onSlideChange={this.handleSlideChange} />
+				<QuestionSlides slidesData={this.questionSet} slideTypes={this.SLIDE_TYPES} onSlideChange={this.handleSlideChange} />
 			</div>
 		);
 	}
