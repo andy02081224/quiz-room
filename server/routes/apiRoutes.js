@@ -4,55 +4,50 @@ let logicCtrl = require('../controllers/logicController');
 router.get('/questionset', function(req, res) {
 	logicCtrl.getQuestionSetList()
 		.then((response) => {
-			res.send(response);
+			res.json(response);
 		})
 		.catch((err) => {
-			console.error(err);
-			res.send('error');
+			res.status(500).json(err);
 		});
 });
 
 router.get('/questionset/:id', function(req, res) {
 	logicCtrl.getQuestionSet(req.params.id)
 		.then((response) => {
-			res.send(response);
+			res.json(response);
 		})
 		.catch((err) => {
-			console.error(err);
-			res.send('error');
+			res.status(500).json(err);
 		})
 });
 
 router.post('/questionset', function(req, res) {
 	logicCtrl.createQuestionSet(req.body)
 		.then((response) => {
-			res.send(response);
+			res.json(response);
 		})
 		.catch((err) => {
-			console.error(err);
-			res.send('error');
+			res.status(500).json(err);
 		});
 });
 
 router.patch('/questionset/:id', function(req, res) {
 	logicCtrl.updateQuestionSet(req.params.id, req.body)
 		.then((response) => {
-			res.send(response);
+			res.json(response);
 		})
 		.catch((err) => {
-			console.error(err);
-			res.send('error');
+			res.status(500).json(err);
 		})
 });
 
 router.delete('/questionset/:id', function(req, res) {
 	logicCtrl.deleteQuestionSet(req.params.id)
 		.then((response) => {
-			res.send(response);
+			res.json(response);
 		})
 		.catch((err) => {
-			console.error(err);
-			res.send('error');
+			res.status(500).json(err);
 		});
 });
 

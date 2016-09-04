@@ -2,73 +2,70 @@
 
 let io = require('socket.io');
 
-function socketServer() {
+function SocketServer() {
 	this.keyStore = {};
 	this.io = null;
 };
 
-socketServer.prototype.listen = function(server) {
+SocketServer.prototype.listen = function(server) {
 	this.io = io(server);
 
 	this.io.on('connect', (socket) => {
+		console.log('');
+		console.log('--------------------------------------------');
 		console.log('a user connected, socket id:' + socket.id);
+		console.log('--------------------------------------------');
 
-		socket.on('roomId', (data) => {
-			this.keyStore[data.roomId] = socket.id;
-			socket.roomId = data.roomId;
-			socket.join(data.roomId);
+		socket.on('createRoom', (data) => {
+			this.keyStore[data.roomID] = socket.id;
+			socket.roomID = data.roomID;
+			socket.join(data.roomID);
 
-			console.log('Room ID:', data.roomId, 'Socket ID:', socket.id);
+			console.log('Room ID:', data.roomID, 'Socket ID:', socket.id);
 		});
 
-		socket.on('pair', (data) => {
-			let masterSocketId = this.keyStore[data.roomId];
+		socket.on('joinRoom', (data) => {
+			let masterSocketID = this.keyStore[data.roomID];
 
-			socket.join(data.roomId);
-			socket.roomId = data.roomId;
+			socket.join(data.roomID);
+			socket.roomID = data.roomID;
+			socket.masterID = masterSocketID;
 			socket.playerName = data.playerName;
 
-			this.io.to(masterSocketId).emit('addPlayer', data);
+			this.io.to(masterSocketID).emit('addPlayer', data);
 		})
 
-		socket.on('gameStart', (data) => {
-			this.io.to(data.roomId).emit('gameStart', { gameStart: true });
+		socket.on('startGame', (data) => {
+			socket.gameStart = true;
+			this.io.to(data.roomID).emit('startGame');
 		});
 
-		socket.on('questionChange', (data) => {
-			this.io.to(socket.roomId).emit('questionChange', data);
+		socket.on('changeQuestionType', (data) => {
+			this.io.to(socket.roomID).emit('changeQuestionType', data);
 		});
 
 		socket.on('submitAnswer', (data) => {
-			let masterSocketId = this.keyStore[data.roomId];
-
-			this.io.to(masterSocketId).emit('receiveAnswer', data);
-			console.log('master socket id:', masterSocketId);
-			console.log(`${data.playerName} submits answer: ${data.answer}`)
+			this.io.to(socket.masterID).emit('receiveAnswer', data);
 		});	
 
 		socket.on('nextQuestion', (data) => {
-			this.io.to(socket.roomId).emit('nextQuestion', data);
+			this.io.to(socket.roomID).emit('nextQuestion', data);
 		});
 		
-		socket.on('toController', (data) => {
-			this.io.to(data.roomId).emit('fromMaster', 'message from game master');
-		});
-
 		socket.on('gameFinish', (data) => {
-			this.io.to(socket.roomId).emit('gameFinish', data);
+			this.io.to(socket.roomID).emit('gameFinish', data);
 		});
 
 		socket.on('gameResult', (data) => {
-			this.io.to(socket.roomId).emit('gameResult', data);
+			this.io.to(socket.roomID).emit('gameResult', data);
 		});
 
 		socket.on('disconnect', (data) => {
-			let masterId = this.keyStore[socket.roomId];
+			let masterID = this.keyStore[socket.roomID];
 			
-			this.io.to(masterId).emit('playerLeave', {
+			this.io.to(masterID).emit('playerLeave', {
 				id: socket.id.replace('/#', ''),
-				roomId: socket.roomId,
+				roomID: socket.roomID,
 				playerName: socket.playerName
 			});
 		});
@@ -76,15 +73,9 @@ socketServer.prototype.listen = function(server) {
 	});
 };
 
-socketServer.prototype.connectPeers = function(key, cb) {
-	console.log('keyStore:', this.keyStore);
-	if (key in this.keyStore) {
-		cb(false);
-		// this.io.to(this.keyStore[key]).emit('fromPeer', 'hi');
-	}
-	else {
-		cb(true);
-	}
+SocketServer.prototype.isRoomExists = function(roomID) {
+	console.log('isRoomExists:', roomID in this.keyStore);
+	return (roomID in this.keyStore)
 };
 
-module.exports = socketServer;
+module.exports = SocketServer;

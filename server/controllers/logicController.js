@@ -4,8 +4,8 @@ let logicController = {
 	activate: function(socket) {
 		this.socket = socket;
 	},
-	connectPeers: function(key, cb) {
-		this.socket.connectPeers(key, cb);
+	isRoomExists: function(roomID) {
+		return this.socket.isRoomExists(roomID);
 	},
 	getQuestionSetList: function() {
 		return new Promise((resolve, reject) => {

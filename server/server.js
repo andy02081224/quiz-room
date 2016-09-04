@@ -73,8 +73,12 @@ function init() {
 	app.use(bodyParser.json());
 
 	// Routes
-	app.use('/', appRoutes);
+	app.use(function(req, res, next) {
+	  console.log('%s %s', req.method, req.url);
+	  next();
+	});
 	app.use('/api', apiRoutes);
+	app.use('/', appRoutes);
 
 	let appPort = process.env.APP_PORT || 3000;
 	let devProxyServerPort = process.env.DEV_PROXY_SERVER_PORT || 8080;
