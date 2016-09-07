@@ -1,5 +1,7 @@
 # Quiz Room API Doc
 
+## Rest API
+
 ### Question Set
 
 ##### List question set
@@ -130,5 +132,136 @@ GET /api/questionset/:id
 		"answer": "c:1945"
 	}]
 }
+```
+
+## Socket Events
+
+MC: Master Client, CC: Controller Client, R: All clients in the room, S: Server
+
+
+
+**Create Room**
+
+Create game room with specifed ID
+
+```bash
+[MC > S] createRoom
+```
+
+###### Parameters
+
+| Name   | Type   | Description                           |
+| ------ | ------ | ------------------------------------- |
+| roomID | string | **Required**. Unique room indentifier |
+
+
+
+**Join Room**
+
+Join specified game room
+
+```bash
+[CC > S] joinRoom
+```
+
+###### Parameters
+
+| Name       | Type   | Description                    |
+| ---------- | ------ | ------------------------------ |
+| roomID     | string | **Required**. Room indentifier |
+| playerName | string | **Required**.                  |
+
+
+
+**Add New Player**
+
+```
+[S > MC] addPlayer
+```
+
+###### Parameters
+
+| Name       | Type   | Description             |
+| ---------- | ------ | ----------------------- |
+| roomID     | string | Room indentifier        |
+| playerName | string | New added player's name |
+
+
+
+**Player Leave Game**
+
+Notify master when a player leaves game
+
+```
+[S > MC] playerLeave
+```
+
+
+
+**Start Game Notification**
+
+Start game from master client
+
+```
+[MC > S] startGame
+[S > R] startGame
+```
+
+
+
+**Question Type Change Notification**
+
+Change question type
+
+```
+[MC > S] changeQuestionType
+[S > R] changeQuestionType
+```
+
+
+
+**Next Question Notification**
+
+```
+[MC > S] nextQuestion
+[S > R] nextQuestion
+```
+
+
+
+**Game Finish Notification**
+
+```
+[MC > S] gameFinish
+[S > R] gameFinish
+```
+
+
+
+**Game Result Data**
+
+```
+[MC > S] gameResult
+[S > R] gameResult
+```
+
+```json
+{
+  playerCount: 2,
+  questionCount: 3,
+  questionSetName: "Question Set 1",
+  winner: 'player1',
+  playerStats: [{
+      id: '123',
+      name: 'player1',
+      score: 3,
+      submittedAnswers: ['a', 'b', 'c']
+  }, {
+      id: '456',
+      name: 'player2',
+      score: 2,
+      submittedAnswers: ['a', 'a', 'c']
+  }]
+};
 ```
 
