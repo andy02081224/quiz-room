@@ -44,9 +44,7 @@ function init() {
 	let SocketServer = require('./socketServer');
 	let __dirroot = path.resolve(__dirname, '..');
 	let __dirclient, devProxyServer; 
-	let logicController = require('./controllers/logicController');
-	let appRoutes = require('./routes/appRoutes');
-	let apiRoutes = require('./routes/apiRoutes');
+	let index = require('./routes/index.js');
 
 	// Set client directory based on NODE_ENV
 	if (process.env.NODE_ENV == 'development') {
@@ -72,14 +70,6 @@ function init() {
 	app.use(bodyParser.urlencoded({extended: true}));
 	app.use(bodyParser.json());
 
-	// Routes
-	app.use(function(req, res, next) {
-	  console.log('%s %s', req.method, req.url);
-	  next();
-	});
-	app.use('/api', apiRoutes);
-	app.use('/', appRoutes);
-
 	let appPort = process.env.APP_PORT || 3000;
 	let devProxyServerPort = process.env.DEV_PROXY_SERVER_PORT || 8080;
 	let server = app.listen(appPort, () => {
@@ -88,7 +78,15 @@ function init() {
 
 	let socketServer = new SocketServer();
 	socketServer.listen(server);
-	logicController.activate(socketServer);
+
+	// Print requests
+	app.use(function(req, res, next) {
+	  console.log('%s %s', req.method, req.url);
+	  next();
+	});
+	
+	// Load routes
+	index(app, socketServer);
 
 	if (devProxyServer && process.env.NODE_ENV == 'development') {
 		devProxyServer.listen(devProxyServerPort, '0.0.0.0', (err, result) => {
