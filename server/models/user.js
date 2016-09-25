@@ -10,14 +10,13 @@ let UserSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	name: {
-		type: String,
-		required: true
-	},
 	email: {
 		type: String,
 		required: true,
 		uniqure: true
+	},
+	name: {
+		type: String
 	},
 	image: {
 		type: String
@@ -28,4 +27,4 @@ let UserSchema = new mongoose.Schema({
 
 });
 
-model.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

@@ -39,6 +39,7 @@ function init() {
 	let app = express();
 	let io = require('socket.io');
 	let path = require('path');
+	let cookieParser = require('cookie-parser');
 	let exphbs = require('express-handlebars');
 	let bodyParser = require('body-parser');
 	let SocketServer = require('./socketServer');
@@ -69,6 +70,7 @@ function init() {
 	app.use(express.static(__dirclient));
 	app.use(bodyParser.urlencoded({extended: true}));
 	app.use(bodyParser.json());
+	app.use(cookieParser());
 
 	let appPort = process.env.APP_PORT || 3000;
 	let devProxyServerPort = process.env.DEV_PROXY_SERVER_PORT || 8080;

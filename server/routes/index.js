@@ -9,6 +9,17 @@ module.exports = function(app, socket) {
 		}
 	});
 
+	app.use(function errHandler(err, req, res, next) {
+		console.error(err);
+		
+		if (err.statusCode) {
+			res.status(err.statusCode).json(err);
+		}
+		else {
+			res.status(400).json(err);
+		}
+	});
+
 	const masterRoutes = ['/login', '/register', '/game', '/result', /\//];
 	const controllerRoutes = ['/room/:roomID', '/room/:roomID/game', '/room/:roomID/result'];
 
