@@ -102,6 +102,8 @@ POST /api/questionset
 }
 ```
 
+
+
 ##### Get question set
 
 Get specifed question set
@@ -134,6 +136,125 @@ GET /api/questionset/:id
 }
 ```
 
+
+
+### User
+
+##### Register new user
+
+```
+POST /api/user/register
+```
+
+###### Input
+
+| Name     | Type   | Description                              |
+| -------- | ------ | ---------------------------------------- |
+| username | string | **Required**. Username to login          |
+| password | string | **Required**. User password to login     |
+| email    | string | **Required**. User email                 |
+| name     | string | User name showed on profile page. If omitted, it will be the same as username |
+
+###### Example
+
+```json
+{
+  "username": "user1",
+  "password": "password",
+  "email": "user1@example.com",
+  "name": "Super User"
+}
+```
+
+###### Response
+
+```
+Status: 200 OK
+```
+
+```json
+{
+  "id": "3498572043958",
+  "username": "user1",
+  "email": "user1@example.com",
+  "name": "Super User"
+}
+```
+
+
+
+##### Log in user
+
+```
+POST /api/user/login
+```
+
+| Name     | Type   | Description                          |
+| -------- | ------ | ------------------------------------ |
+| username | string | **Required**. Username to login      |
+| password | string | **Required**. User password to login |
+
+###### Response
+
+```
+Status: 200 OK
+```
+
+```json
+{
+  "id": "3498572043",
+  "username": "user1",
+  "email": "user1@example.com",
+  "name": "Super User",
+  "thumbnail": "/image/user1.jpg"
+}
+```
+
+
+
+##### Log out user
+
+```
+GET /api/user/logout
+```
+
+###### Response
+
+```
+Status: 200 OK
+```
+
+```json
+{
+  "id": "3498572043",
+  "username": "user1"
+}
+```
+
+
+
+##### Check login status
+
+```
+GET /api/user/status
+```
+
+###### Response
+
+```
+Status: 200 OK
+```
+
+```json
+{
+  "loggedIn": true,
+  "id": "3498572043",
+  "username": "user1"
+}
+```
+
+
+
 ## Socket Events
 
 MC: Master Client, CC: Controller Client, R: All clients in the room, S: Server
@@ -154,7 +275,7 @@ Create game room with specifed ID
 | ------ | ------ | ------------------------------------- |
 | roomID | string | **Required**. Unique room indentifier |
 
-
+###### 
 
 **Join Room**
 
@@ -247,20 +368,20 @@ Change question type
 
 ```json
 {
-  playerCount: 2,
-  questionCount: 3,
-  questionSetName: "Question Set 1",
-  winner: 'player1',
-  playerStats: [{
-      id: '123',
-      name: 'player1',
-      score: 3,
-      submittedAnswers: ['a', 'b', 'c']
+  "playerCount": 2,
+  "questionCount": 3,
+  "questionSetName": "Question Set 1",
+  "winner": "player1",
+  "playerStats": [{
+      "id": "123",
+      "name": "player1",
+      "score": 3,
+      "submittedAnswers": ["a", "b", "c"]
   }, {
-      id: '456',
-      name: 'player2',
-      score: 2,
-      submittedAnswers: ['a', 'a', 'c']
+      "id": "456",
+      "name": "player2",
+      "score": 2,
+      "submittedAnswers": ["a", "a", "c"]
   }]
 };
 ```
