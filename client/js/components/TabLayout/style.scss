@@ -1,0 +1,35 @@
+.tab-layout {
+	&__tabs {
+		margin-bottom: 30px;
+	}
+
+	&__tabs ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	&__tabs li {
+		display: inline-block;
+		text-align: center;
+		padding: 10px 0;
+	}
+
+	&__tabs li:hover {
+		cursor: pointer;
+	}
+
+	&__tab {
+		border-bottom: 2px solid white;
+		box-shadow: 0 1px 0 0 #dbdbdb;
+	}
+
+	&__tab:hover {
+		box-shadow: 0 1px 0 0 darken(#dbdbdb, 20%);
+	}
+
+	&__tab--selected {
+		box-shadow: none;
+		border-bottom: 3px solid #3498db;
+	}
+}
