@@ -5,9 +5,9 @@ import { Router, Route, browserHistory } from 'react-router';
 import io from 'socket.io-client';
 
 /* Components */
-import ControllerStartPage from './pages/ControllerStartPage.jsx';
-import ControllerGamePage from './pages/ControllerGamePage.jsx';
-import ControllerResultPage from './pages/ControllerResultPage.jsx';
+import ControllerStartPage from './pages/ControllerStartPage';
+import ControllerGamePage from './pages/ControllerGamePage';
+import ControllerResultPage from './pages/ControllerResultPage';
 
 /* Styles */
 import '../styles/app.scss';

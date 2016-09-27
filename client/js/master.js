@@ -10,11 +10,11 @@ import SiteContent from './components/SiteContent/SiteContent.jsx';
 
 
 /* Page Components */
-import LoginPage from './pages/LoginPage.jsx';
-import MasterStartPage from './pages/MasterStartPage.jsx';
-import MasterRegisterPage from './pages/MasterRegisterPage.jsx';
-import MasterGamePage from './pages/MasterGamePage.jsx';
-import MasterResultPage from './pages/MasterResultPage.jsx';
+import LoginPage from './pages/LoginPage';
+import MasterStartPage from './pages/MasterStartPage';
+import MasterRegisterPage from './pages/MasterRegisterPage';
+import MasterGamePage from './pages/MasterGamePage';
+import MasterResultPage from './pages/MasterResultPage';
 
 /* Styles */
 import '../styles/app.scss';

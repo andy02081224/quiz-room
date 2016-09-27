@@ -1,8 +1,8 @@
 import React from 'react';
 import { find } from 'lodash';
 
-import FullscreenLabel from '../components/FullscreenLabel/FullscreenLabel.jsx';
-import PersonalResultViewer from '../components/PersonalResultViewer/PersonalResultViewer.jsx';
+import FullscreenLabel from '../../components/FullscreenLabel/FullscreenLabel.jsx';
+import PersonalResultViewer from '../../components/PersonalResultViewer/PersonalResultViewer.jsx';
 
 class ControllerResultPage extends React.Component {
 	constructor(props) {

@@ -2,7 +2,7 @@
 import React from 'react';
 
 /* Components */
-import LoginForm from '../components/LoginForm/LoginForm.jsx';
+import AuthBox from '../../components/AuthBox';
 
 class LoginPage extends React.Component {
 	constructor(props) {
@@ -13,7 +13,7 @@ class LoginPage extends React.Component {
 		return (
 			<div className="page login-page">
 				<div className="content-wrapper">
-					<LoginForm />
+					<AuthBox />
 				</div>
 			</div>
 		);

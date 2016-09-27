@@ -3,8 +3,8 @@ import Reveal from 'reveal.js';
 import { extend, find } from 'lodash';
 import { withRouter } from 'react-router';
 
-import PlayerTable from '../components/PlayerTable/PlayerTable.jsx';
-import QuestionSlides from '../components/QuestionSlides/QuestionSlides.jsx';
+import PlayerTable from '../../components/PlayerTable/PlayerTable.jsx';
+import QuestionSlides from '../../components/QuestionSlides/QuestionSlides.jsx';
 
 
 class MasterGamePage extends React.Component {

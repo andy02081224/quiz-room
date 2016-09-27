@@ -2,7 +2,7 @@ import React from 'react';
 import { browserHistory, withRouter } from 'react-router'; 
 import io from 'socket.io-client';
 
-import AnswerController from '../components/AnswerController/AnswerController.jsx';
+import AnswerController from '../../components/AnswerController/AnswerController.jsx';
 
 class ControllerGamePage extends React.Component {
 	constructor(props) {

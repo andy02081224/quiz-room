@@ -2,16 +2,16 @@
 import React from 'react';
 import io from 'socket.io-client';
 import { findIndex } from 'lodash';
-import utils from '../utils/utils';
+import utils from '../../utils/utils';
 import { browserHistory, withRouter } from 'react-router';
 import  {
 	getQuestionSet
-} from '../utils/apiManager.js';
+} from '../../utils/apiManager.js';
 
 /* Components */
-import Panel from '../components/Panel/Panel.jsx';
-import RoomIdViewer from '../components/RoomIdViewer/RoomIdViewer.jsx';
-import PlayerList from '../components/PlayerList/PlayerList.jsx';
+import Panel from '../../components/Panel/Panel.jsx';
+import RoomIdViewer from '../../components/RoomIdViewer/RoomIdViewer.jsx';
+import PlayerList from '../../components/PlayerList/PlayerList.jsx';
 
 
 class MasterRegisterPage extends React.Component {

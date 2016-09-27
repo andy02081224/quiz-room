@@ -2,11 +2,11 @@
 import React from 'react';
 import io from 'socket.io-client';
 import { withRouter } from 'react-router';
-import { getQuestionSetList } from '../utils/apiManager.js';
+import { getQuestionSetList } from '../../utils/apiManager.js';
 
 /* Components */
-import SiteTitle from '../components/SiteTitle/SiteTitle.jsx';
-import QuestionSetViewer from '../components/QuestionSetViewer/QuestionSetViewer.jsx';
+import SiteTitle from '../../components/SiteTitle/SiteTitle.jsx';
+import QuestionSetViewer from '../../components/QuestionSetViewer/QuestionSetViewer.jsx';
 
 
 class MasterStartPage extends React.Component {

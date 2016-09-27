@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ResultSlides from '../components/ResultSlides/ResultSlides.jsx';
+import ResultSlides from '../../components/ResultSlides/ResultSlides.jsx';
 
 class MasterResultPage extends React.Component {
 	constructor(props) {

@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { withRouter } from 'react-router';
 
 /* Components */
-import FullscreenLabel from '../components/FullscreenLabel/FullscreenLabel.jsx';
+import FullscreenLabel from '../../components/FullscreenLabel/FullscreenLabel.jsx';
 
 
 class ControllerStartPage extends React.Component {
