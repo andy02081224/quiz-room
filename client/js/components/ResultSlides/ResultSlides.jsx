@@ -34,6 +34,20 @@ class ResultSlides extends React.Component {
 		}.bind(this));
 	}
 
+	renderAdditonalLinks() {
+		let addtionalLinks = this.props.links.map((link) => {
+			if (link.href == '#/box-score') return;
+			
+			return (
+				<a href={link.href} key={link.href}>
+					{link.title}
+				</a>
+			);
+		});
+
+		return addtionalLinks;
+	}
+
 	render() {
 		let winners = this.props.gameResult.playerStats.filter((player) => {
 			return player.rank == 1;
@@ -46,6 +60,7 @@ class ResultSlides extends React.Component {
 				<AnnouncementAnimation winnerNames={winnerNames} links={this.props.links}>
 					<section id="box-score">
 						<BoxScore playerStats={this.props.gameResult.playerStats} />
+						<p className="result-slides__links">{this.renderAdditonalLinks()}</p>
 					</section>
 				</AnnouncementAnimation>
 			</div>
