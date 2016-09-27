@@ -91,9 +91,8 @@ class MasterGamePage extends React.Component {
 			return stats;
 		});
 
-		gameResult.playerStats.sort(function sortByScore(a, b) {
-			b.score - a.score;
-		});
+		// Sort by score
+		gameResult.playerStats.sort((a, b) => b.score - a.score);
 
 		
 		let rank = 1;
