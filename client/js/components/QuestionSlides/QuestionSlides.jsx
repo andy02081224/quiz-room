@@ -20,8 +20,8 @@ class QuestionSlides extends React.Component {
 
 	componentDidMount() {
 		Reveal.initialize({
-			slideNumber: true,
 			center: true,
+			controls: false,
 			overview: false
 		});
 
