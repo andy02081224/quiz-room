@@ -7,7 +7,7 @@ const API_ERR_MSG = require('../utils/generalAPIErrorMessage.js')
 const API_USER_REGISTER = '/user/register';
 const API_USER_LOGIN = '/user/login';
 const API_USER_LOGOUT = '/user/logout';
-const API_USER_AUTHENTICATE = '/user/authenticate';
+const API_USER_STATUS = '/user/status';
 
 const bcryptConfig = {
 	saltRounds: 10
@@ -121,7 +121,7 @@ module.exports = function(socket) {
 		});	
 	});
 
-	router.get(API_USER_AUTHENTICATE, (req, res, next) => {
+	router.get(API_USER_STATUS, (req, res, next) => {
 		let token = req.cookies.token;
 
 		if (!token) {
