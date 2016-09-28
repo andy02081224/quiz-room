@@ -13,6 +13,44 @@
 	background-color: $color-concrete;
 }
 
-.btn-block {
+.btn--block {
 	width: 100%;
+}
+
+/* Success Button */
+$btn-success-bgc: #27ae60;
+
+.btn--success {
+	color: white;
+	background-color: $btn-success-bgc;
+}
+
+.btn--success:hover {
+	background-color: darken($btn-success-bgc, 10%);
+}
+
+
+/* Info Button */
+$btn-info-bgc: #3498db;
+
+.btn--info {
+	color: white;
+	background-color: $btn-info-bgc;
+}
+
+.btn--info:hover {
+	background-color: darken($btn-info-bgc, 10%);
+}
+
+
+/* Danger Button */
+$btn-danger-bgc: #e74c3c;
+
+.btn--danger {
+	color: white;
+	background-color: $btn-danger-bgc;
+}
+
+.btn--danger:hover {
+	background-color: darken($btn-danger-bgc, 10%);
 }
