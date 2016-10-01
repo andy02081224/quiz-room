@@ -31,7 +31,7 @@ module.exports = function(app, socket) {
 		let roomID = req.params.roomID;
 
 		if (socket.isRoomExists(roomID)) {
-			res.render('controller');
+			res.render('master');
 		}
 		else {	
 			res.redirect('/');

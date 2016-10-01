@@ -12,8 +12,7 @@ var __dirnodemodules = path.resolve(__dirname, 'node_modules');
 
 module.exports = {
 	entry: {
-		'js/master': './client/js/master.js',
-		'js/controller': './client/js/controller.js',
+		'js/app': './client/js/index.js',
 		'js/vendor': ['jquery', 'react', 'react-dom', 'socket.io-client', 'lodash', 'react-router', 'reveal.js', 'classnames', 'whatwg-fetch']
 	},
 	output: {

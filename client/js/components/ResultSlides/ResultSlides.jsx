@@ -5,7 +5,7 @@ import AnnouncementAnimation from './AnnouncementAnimation.jsx';
 import BoxScore from './BoxScore.jsx';
 
 /* Styles */
-import '../../../../node_modules/reveal.js/css/reveal.css';
+// import '../../../../node_modules/reveal.js/css/reveal.css';
 import './ResultSlides.scss';
 
 
