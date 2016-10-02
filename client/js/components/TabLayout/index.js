@@ -40,7 +40,7 @@ class TabLayout extends React.Component {
 				<li data-tab-id={tab.id} className={tabClass} key={tab.id} style={tabStyle}>
 					{tab.label}
 				</li>
-			)
+			);
 		});
 
 		return tabs;

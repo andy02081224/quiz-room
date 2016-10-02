@@ -96,7 +96,10 @@ module.exports = function(socket) {
 				else {
 					return next({
 						statusCode: 401,
-						message: 'Unauthorized'
+						message: 'Unauthorized',
+						error: {
+							path: req.url
+						}
 					});
 				}
 			});

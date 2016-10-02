@@ -13,7 +13,11 @@ class LoginPage extends React.Component {
 		return (
 			<div className="page login-page">
 				<div className="content-wrapper">
-					<AuthBox />
+					<AuthBox 
+						onLoginClick={this.props.loginUser}
+						isProcessing={this.props.ui.isProcessing}
+						authMessage={this.props.ui.authMessage}
+					/>
 				</div>
 			</div>
 		);

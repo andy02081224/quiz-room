@@ -15,18 +15,18 @@ function createJSONConfig(data, method='POST') {
 function makeRequest(url, config={}) {
 	return fetch(url, config)
 		.then((response) => {
-			if (response.status == 200) {
-				return response.json();
-			}
-			else {
-				throw response.json();
-			}			
+			return response.json();		
 		})
 		.then((json) => {
-			return json;
+			if (!json.error) {
+				return json;
+			}
+			else {
+				return Promise.reject(json);
+			}
 		})
 		.catch((err) => {
-			throw err;
+			return Promise.reject(err);
 		});
 }
 
@@ -55,6 +55,9 @@ function getQuestionSet(questionsetID) {
 }
 
 export {
+	registerUser,
+	loginUser,
+	logoutUser,
 	getQuestionSetList,
 	getQuestionSet
 };

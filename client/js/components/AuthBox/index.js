@@ -11,6 +11,12 @@ import SignUpForm from './SignUpForm.js';
 import './style.scss';
 
 class AuthBox extends React.Component {
+	static propTypes = {
+		onLoginClick: React.PropTypes.func.isRequired,
+		isProcessing: React.PropTypes.bool.isRequired,
+		authMessage: React.PropTypes.string
+	};
+
 	constructor(props) {
 		super(props);
 	}
@@ -29,7 +35,11 @@ class AuthBox extends React.Component {
 				<header>Quiz Room</header>
 				<TabLayout tabData={tabData} selectedTab="login">
 					<div data-tab-id="login">
-						<LoginForm />
+						<LoginForm 
+							onLoginClick={this.props.onLoginClick} 
+							isProcessing={this.props.isProcessing}
+							authMessage={this.props.authMessage}
+						/>
 					</div>		
 					<div data-tab-id="signUp">
 						<SignUpForm />

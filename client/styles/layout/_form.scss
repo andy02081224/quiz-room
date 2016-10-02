@@ -5,10 +5,19 @@
 .form-group label {
 	display: block;
 	margin-bottom: 5px;
+	color: #707070;
 }
 
 .form-input {
 	display: block;
 	border: 1px solid #dbdbdb;
 	width: 100%;
+	line-height: 1.5;
+}
+
+.form-error {
+	font-size: 1.2rem;
+  display: block;
+  margin-top: 5px;
+  color: red;
 }

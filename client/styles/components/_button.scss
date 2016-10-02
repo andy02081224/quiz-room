@@ -7,6 +7,10 @@
 	// font-size: 2rem;
 }
 
+.btn:disabled:hover {
+	cursor: not-allowed;
+}
+
 .btn:hover {
 	cursor: pointer;
 	color: white;

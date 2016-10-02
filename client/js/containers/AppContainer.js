@@ -1,6 +1,7 @@
 /* Libs */
 import React from 'react';
 import { connect } from 'react-redux';
+import '../utils/validation.js';
 
 /* Components */
 import SiteHeader from '../components/SiteHeader/SiteHeader.jsx';

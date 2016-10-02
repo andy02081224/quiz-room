@@ -10,7 +10,7 @@ module.exports = function(app, socket) {
 	});
 
 	app.use(function errHandler(err, req, res, next) {
-		console.error(err);
+		console.error(JSON.stringify(err, null, 2));
 		
 		if (err.statusCode) {
 			res.status(err.statusCode).json(err);
