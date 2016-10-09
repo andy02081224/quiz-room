@@ -4,19 +4,42 @@ import { connect } from 'react-redux';
 import '../utils/validation.js';
 
 /* Components */
-import SiteHeader from '../components/SiteHeader/SiteHeader.jsx';
+import SiteHeader from '../components/SiteHeader';
 import SiteContent from '../components/SiteContent/SiteContent.jsx';
 
 /* Styles */
 import '../../styles/app.scss';
 
 const App = function(props) {
+	let appNavItems = [{
+		label: 'item1',
+		link: '/'
+	}, {
+		label: 'item2',
+		link: '/'
+	}];
+
 	return (
 		<div>
-			<SiteHeader logo="Quiz Room" />
+			<SiteHeader siteTitle="Quiz Room" navItems={appNavItems} userInfo={props.userInfo} />
 			<SiteContent>{props.children}</SiteContent>
 		</div>
 	);
 };
 
-export default connect()(App);
+const userInfoSelector = (state) => {
+	let { id, username, image }  = state.user;
+	return { id, username, image };
+};
+
+const mapStateToProps = function(state) {
+	return {
+		userInfo: userInfoSelector(state) 
+	}
+};
+
+const mapDispatchToProps = {
+	
+};
+
+export default connect(mapStateToProps)(App);

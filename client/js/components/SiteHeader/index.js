@@ -3,18 +3,16 @@ import React from 'react';
 import { Link } from 'react-router';
 
 /* Styles */
-import './SiteHeader.scss';
+import './style.scss';
+
+/* Components */
+import UserBox from './UserBox';
 
 class SiteHeader extends React.Component {
 	static propTypes = {
-		navItems: React.PropTypes.array
-	};
-
-	static defaultProps = {
-		navItems: [{
-			label: 'Login',
-			link: '/login'
-		}]
+		siteTitle: React.PropTypes.string,
+		navItems: React.PropTypes.array,
+		userInfo: React.PropTypes.object
 	};
 
 	constructor(props) {
@@ -37,12 +35,15 @@ class SiteHeader extends React.Component {
 		return (
 			<header className="site-header">
 				<div className="content-wrapper">
-					<div className="site-header__logo">{this.props.logo}</div>
+					<div className="site-header__logo">
+						<Link to="/">{this.props.siteTitle}</Link>
+					</div>
 					<nav className="site-header__nav">
 						<ul>
 							{this.renderNavItems()}
 						</ul>
 					</nav>
+					<UserBox className="site-header__user-box" {...this.props.userInfo} />
 				</div>
 			</header>
 		);
