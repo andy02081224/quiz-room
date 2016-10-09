@@ -9,7 +9,8 @@ const initialState = {
 	},
 	isLoggedIn: false,
 	id: '',
-	username: ''
+	username: '',
+	image: ''
 };
 
 export default function user(state=initialState, action) {
@@ -37,7 +38,8 @@ function loginUser(state, action) {
 				 },
 				isLoggedIn: true,
 				id: action.payload.id,
-				username: action.payload.username
+				username: action.payload.username,
+				image: action.payload.image
 			});
 		case REJECTED:
 			return Object.assign({}, state, {
