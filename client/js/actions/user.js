@@ -1,4 +1,4 @@
-import { createActionObject } from './actionHelpers.js';
+import { createAsyncActionObject } from './actionHelpers.js';
 import { browserHistory } from 'react-router';
 import {
 	registerUser as registerUserRequest,
@@ -6,7 +6,7 @@ import {
 	logoutUser as logoutUserRequest
 } from '../utils/apiManager.js';
 
-export const LOGIN_USER = createActionObject('LOGIN_USER');
+export const LOGIN_USER = createAsyncActionObject('LOGIN_USER');
 
 function actionLoginUser(credentials) {
 	return {
@@ -24,7 +24,8 @@ export function loginUser(credentials) {
 					path: '/',
 					state: {
 						userID: value.id,
-						username: value.username
+						username: value.username,
+						image: value.image
 					}
 				});
 			})

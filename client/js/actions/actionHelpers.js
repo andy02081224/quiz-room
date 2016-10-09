@@ -1,4 +1,4 @@
-export function createActionObject(actionName) {
+export function createAsyncActionObject(actionName) {
 	return {
 		NAME: actionName,
 		TYPES: [
