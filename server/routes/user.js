@@ -85,7 +85,8 @@ module.exports = function(socket) {
 				if (isValidUser) {
 					let userData = {
 						id: foundUser.id,
-						username: foundUser.username
+						username: foundUser.username,
+						image: foundUser.image
 					};
 
 					let token = jwt.sign(userData, jwtConfig.secret, jwtConfig.options);
