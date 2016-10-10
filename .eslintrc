@@ -24,6 +24,6 @@
     "no-alert": 0,
     "no-lone-blocks": 0,
     "jsx-quotes": 1,
-    "no-mixed-spaces-and-tabs": 1
+    "no-mixed-spaces-and-tabs": 0
   }
 }
