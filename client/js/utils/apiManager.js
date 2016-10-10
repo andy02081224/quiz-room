@@ -2,12 +2,12 @@ import 'whatwg-fetch';
 import API from './api.js';
 
 
-function createJSONConfig(data, method='POST') {
+function createJSONConfig(data, method='POST', headers) {
 	return {
 		method: method,
-		headers: {
+		headers: Object.assign({
 			'Content-Type': 'application/json'
-		},
+		}, headers),
 		body: JSON.stringify(data)
 	};
 }
@@ -42,8 +42,10 @@ function logoutUser() {
 	return makeRequest(API.LOGOUT_USER);
 }
 
-function checkUserAuthStatus() {
-	return makeRequest(API.CHECK_USER_STATUS);
+function checkUserStatus() {
+	return makeRequest(API.CHECK_USER_STATUS, {
+		headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+	});
 }
 
 function getQuestionSetList() {
@@ -58,6 +60,7 @@ export {
 	registerUser,
 	loginUser,
 	logoutUser,
+	checkUserStatus,
 	getQuestionSetList,
 	getQuestionSet
 };
