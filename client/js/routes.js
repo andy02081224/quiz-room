@@ -1,6 +1,8 @@
 import React from 'react';
 import { Router, IndexRoute, Route, browserHistory } from 'react-router';
 import io from 'socket.io-client';
+import store from './store';
+import { checkUserStatus } from './actions/user';
 
 /* Containers */
 import AppContainer from './containers/AppContainer';
@@ -18,7 +20,7 @@ let socket = io.connect(`${location.hostname}:3000`);
 
 let Routes = (
 	<Router history={browserHistory}>
-		<Route path="/" component={AppContainer}>
+		<Route path="/" component={AppContainer} onEnter={getUserStatus}>
 			<IndexRoute socket={socket} component={MasterStartPage} />
 			<Route path="register/:id" socket={socket} component={MasterRegisterPage} />
 			<Route path="game" socket={socket} component={MasterGamePage} />
@@ -32,3 +34,8 @@ let Routes = (
 );
 
 export default Routes;
+
+function getUserStatus(nextState, replace) {
+	console.log('onEnter:', nextState);
+	store.dispatch(checkUserStatus());
+}
