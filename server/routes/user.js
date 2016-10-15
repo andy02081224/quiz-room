@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const router = require('express').Router();
 const jwt = require('jsonwebtoken');
+const uuid = require('node-uuid');
 const UserModel = require('../models/user.js');
 const API_ERR_MSG = require('../utils/generalAPIErrorMessage.js')
 
@@ -14,7 +15,7 @@ const bcryptConfig = {
 };
 
 const jwtConfig = {
-	secret: 'ro1iquz20om6',
+	secret: uuid.v4(),
 	options: {
 		expiresIn: '5d'
 	}
@@ -89,8 +90,7 @@ module.exports = function(socket) {
 						image: foundUser.image
 					};
 
-					let token = jwt.sign(userData, jwtConfig.secret, jwtConfig.options);
-					res.cookie('token', token);
+					userData.token = jwt.sign(userData, jwtConfig.secret, jwtConfig.options);
 
 					res.json(userData);
 				} 
@@ -126,12 +126,15 @@ module.exports = function(socket) {
 	});
 
 	router.get(API_USER_STATUS, (req, res, next) => {
-		let token = req.cookies.token;
-
+		let token = req.get('Authorization').split(' ')[1];
+		console.log('token:', token);
 		if (!token) {
 			return next({
 				statusCode: 401,
-				message: 'Unauthorized'
+				message: 'Unauthorized',
+				error: {
+					path: req.url
+				}
 			});
 		}
 
@@ -139,7 +142,10 @@ module.exports = function(socket) {
 			if (err) {
 				return next({
 					statusCode: 401,
-					message: 'Unauthorized'
+					message: 'Unauthorized',
+					error: {
+						path: req.url
+					}
 				});
 			}
 
