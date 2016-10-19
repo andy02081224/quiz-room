@@ -1,5 +1,5 @@
 import React from 'react';
-import './Panel.scss';
+import './style.scss';
 
 const Panel = function(props) {
 	let header = props.header 

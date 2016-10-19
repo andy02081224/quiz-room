@@ -9,7 +9,7 @@ import  {
 } from '../../utils/apiManager.js';
 
 /* Components */
-import Panel from '../../components/Panel/Panel.jsx';
+import Panel from '../../components/Panel';
 import RoomIdViewer from '../../components/RoomIdViewer/RoomIdViewer.jsx';
 import PlayerList from '../../components/PlayerList/PlayerList.jsx';
 
