@@ -35,7 +35,7 @@ const userInfoSelector = (state) => {
 const mapStateToProps = function(state) {
 	return {
 		userInfo: userInfoSelector(state) 
-	}
+	};
 };
 
 const mapDispatchToProps = {
