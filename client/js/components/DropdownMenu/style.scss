@@ -1,0 +1,32 @@
+.menu {
+	background-color: white;
+	box-shadow: 0 0 2px 1px #afafaf;
+	border-radius: 3px;
+	display: none;
+
+	&--open {
+		display: block;
+	}
+
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	&__item {
+		white-space: nowrap;
+		padding: 8px;
+	}
+
+	&__item:hover {
+		background-color: #dbdbdb;
+	}
+
+	&__divider {
+		display: block;
+		height: 1px;
+		background-color: #dbdbdb;
+	}
+
+}
