@@ -7,6 +7,7 @@ import { checkUserStatus } from './actions/user';
 /* Containers */
 import AppContainer from './containers/AppContainer';
 import LoginPageContainer from './containers/LoginPageContainer';
+import SettingsPageContainer from './containers/SettingsPageContainer';
 import MasterStartPage from './pages/MasterStartPage';
 import MasterRegisterPage from './pages/MasterRegisterPage';
 import MasterGamePage from './pages/MasterGamePage';
@@ -26,6 +27,7 @@ let Routes = (
 			<Route path="game" socket={socket} component={MasterGamePage} />
 			<Route path="result" socket={socket} component={MasterResultPage} />
 			<Route path="login" socket={socket} component={LoginPageContainer} />
+			<Route path="settings" socket={socket} component={SettingsPageContainer} />
 			<Route path="/room/:roomId" socket={socket} component={ControllerStartPage}></Route>
 			<Route path="/room/:roomId/game" socket={socket} component={ControllerGamePage}></Route>
 			<Route path="/room/:roomId/result" socket={socket} component={ControllerResultPage}></Route>
