@@ -20,23 +20,46 @@ module.exports = function(app, socket) {
 		}
 	});
 
+	const validRoutes = [
+		'/login', 
+		'/register', 
+		'/game', 
+		'/result', 
+		'/settings',
+		'/profile/:username',
+		'/room/:roomID', 
+		'/room/:roomID/game', 
+		'/room/:roomID/result',
+		/\//,
+	];
+
 	const masterRoutes = ['/login', '/register', '/game', '/result', /\//];
 	const controllerRoutes = ['/room/:roomID', '/room/:roomID/game', '/room/:roomID/result'];
 
-	app.use(masterRoutes, (req, res, next) => {
-		res.render('master');
-	});
-
-	app.use(controllerRoutes, (req, res, next) => {
-		let roomID = req.params.roomID;
-
-		if (socket.isRoomExists(roomID)) {
+	app.use(validRoutes, (req, res, next) => {
+		if (req.params.roomID) {
+			if (socket.isRoomExists(roomID)) {
+				res.render('master');
+			}
+			else {	
+				res.redirect('/');
+			}
+		}
+		else {
 			res.render('master');
 		}
-		else {	
-			res.redirect('/');
-		}
 	});
+
+	// app.use(controllerRoutes, (req, res, next) => {
+	// 	let roomID = req.params.roomID;
+
+	// 	if (socket.isRoomExists(roomID)) {
+	// 		res.render('master');
+	// 	}
+	// 	else {	
+	// 		res.redirect('/');
+	// 	}
+	// });
 
 	app.get('/*', (req, res) => {
 		res.render('404');

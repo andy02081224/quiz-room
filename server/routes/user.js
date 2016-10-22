@@ -127,7 +127,6 @@ module.exports = function(socket) {
 
 	router.get(API_USER_STATUS, (req, res, next) => {
 		let token = req.get('Authorization').split(' ')[1];
-		console.log('token:', token);
 		if (!token) {
 			return next({
 				statusCode: 401,
