@@ -26,6 +26,7 @@ class UserBox extends React.Component {
 				<Menu className={`${this.props.className}-menu`} open={this.state.dropdownOpen}>
 					<MenuItem>{this.props.username} (@{this.props.username})</MenuItem>
 					<Divider></Divider>
+					<MenuItem><Link to={`/profile/${this.props.username}`}>Your profile</Link></MenuItem>
 					<MenuItem><Link to="/settings">Settings</Link></MenuItem>
 					<MenuItem>Log out</MenuItem>
 				</Menu>
