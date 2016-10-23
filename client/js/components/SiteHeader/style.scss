@@ -36,18 +36,11 @@
 		display: inline-block;
   }
 
-   &__nav li:not(:last-child) {
+  &__nav li:not(:last-child) {
 		margin-right: 15px;
   }
 
   &__user-box {
-  	float: right;
-    position: relative;
-  }
-
-  &__user-box-menu {
-    position: absolute;
-    top: 45px;
-    right: 0;
+  	float: right; 
   }
 }

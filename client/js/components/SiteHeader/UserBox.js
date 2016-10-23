@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Menu, MenuItem, Divider } from '../DropdownMenu';
+import { Menu, MenuTrigger, MenuDropdown, MenuItem, Divider } from '../DropdownMenu';
 
 class UserBox extends React.Component {
 	constructor(props) {
@@ -19,16 +19,19 @@ class UserBox extends React.Component {
 		});
 	}
 
-	renderUserLink() {
+	renderUserLink() {	
 		return (
-			<div className={this.props.className} data-id={this.props.id}>
-				<a onClick={this.toggleDropdown}>{this.props.username}</a>
-				<Menu className={`${this.props.className}-menu`} open={this.state.dropdownOpen}>
-					<MenuItem>{this.props.username} (@{this.props.username})</MenuItem>
-					<Divider></Divider>
-					<MenuItem><Link to={`/profile/${this.props.username}`}>Your profile</Link></MenuItem>
-					<MenuItem><Link to="/settings">Settings</Link></MenuItem>
-					<MenuItem>Log out</MenuItem>
+			<div className={this.props.className}>
+				<Menu>
+					<MenuTrigger>{this.props.username}</MenuTrigger>
+					<MenuDropdown>
+						<MenuItem disabled={true}>{this.props.username} (@{this.props.username})</MenuItem>
+						<Divider></Divider>
+						<MenuItem><Link to={`/profile/${this.props.username}`}>Your profile</Link></MenuItem>
+						<MenuItem><Link to="/settings">Settings</Link></MenuItem>
+						<Divider></Divider>
+						<MenuItem>Log out</MenuItem>
+					</MenuDropdown>
 				</Menu>
 			</div>
 		);

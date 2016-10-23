@@ -1,10 +1,11 @@
 .menu {
-	background-color: white;
-	box-shadow: 0 0 2px 1px #afafaf;
-	border-radius: 3px;
-	display: none;
+	position: relative;
 
-	&--open {
+	&__dropdown {
+		display: none;
+	}
+
+	&--open &__dropdown {
 		display: block;
 	}
 
@@ -14,6 +15,19 @@
 		list-style: none;
 	}
 
+	&__trigger:hover {
+		cursor: pointer;
+	}
+
+	&__dropdown {
+		position: absolute;
+		background-color: white;
+		box-shadow: 0 0 2px 1px #afafaf;
+		border-radius: 3px;
+		top: 45px;
+		right: 0;
+	}
+
 	&__item {
 		white-space: nowrap;
 		padding: 8px;
@@ -21,6 +35,10 @@
 
 	&__item:hover {
 		background-color: #dbdbdb;
+	}
+
+	&__item a {
+		display: block;
 	}
 
 	&__divider {
