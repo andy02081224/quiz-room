@@ -1,6 +1,7 @@
 import {
 	LOGIN_USER,
-	CHECK_USER_STATUS
+	CHECK_USER_STATUS,
+	LOGOUT_USER
 } from '../actions/user.js';
 
 const initialState = {
@@ -14,17 +15,21 @@ const initialState = {
 	image: ''
 };
 
+const UserReducers = {
+	loginUser,
+	checkUserStatus,
+	logoutUser
+};
+
 export default function user(state=initialState, action) {
-	if (LOGIN_USER.TYPES.indexOf(action.type) > -1) {
-		return loginUser(state, action);
-	}
-	if (CHECK_USER_STATUS.TYPES.indexOf(action.type) > -1) {
-		return checkUserStatus(state, action);
+	if (action.meta && action.meta.reducer && typeof UserReducers[action.meta.reducer] == 'function') {
+			return UserReducers[action.meta.reducer](state, action);
 	}
 	else {
 		return state;
 	}
 }
+
 
 function loginUser(state, action) {
 	let [PENDING, FULFILLED, REJECTED] = LOGIN_USER.TYPES;
@@ -76,4 +81,33 @@ function checkUserStatus(state, action) {
 					}
 				});
 	}
+}
+
+function logoutUser(state, action) {
+	let [PENDING, FULFILLED, REJECTED] = LOGOUT_USER.TYPES;
+	
+	switch (action.type) {
+		case PENDING:
+			return Object.assign({}, state, {
+				ui: { isProcessing: true }
+			});
+		case FULFILLED:
+			return Object.assign({}, state, {
+				ui: { 
+					isProcessing: false,
+					authMessage: ''
+				 },
+				isLoggedIn: false,
+				id: '',
+				username: '',
+				image: ''
+			});
+		case REJECTED:
+			return Object.assign({}, state, {
+				ui: { 
+					isProcessing: false
+				}
+			});
+	}
+
 }

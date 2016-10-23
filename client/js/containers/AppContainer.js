@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import '../utils/validation.js';
+import { logoutUser } from '../actions/user';
 
 /* Components */
 import SiteHeader from '../components/SiteHeader';
@@ -21,7 +22,12 @@ const App = function(props) {
 
 	return (
 		<div>
-			<SiteHeader siteTitle="Quiz Room" navItems={appNavItems} userInfo={props.userInfo} />
+			<SiteHeader 
+				siteTitle="Quiz Room" 
+				navItems={appNavItems} 
+				userInfo={props.userInfo} 
+				onUserLogoutClick={props.logoutUser}
+			/>
 			<SiteContent>{props.children}</SiteContent>
 		</div>
 	);
@@ -39,7 +45,15 @@ const mapStateToProps = function(state) {
 };
 
 const mapDispatchToProps = {
-	
+	logoutUser
 };
 
-export default connect(mapStateToProps)(App);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(App);
+
+
+
+
+

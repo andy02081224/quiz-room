@@ -2,14 +2,14 @@ import React from 'react';
 
 const MenuItem = function(props) {
 	function handleMenuItemClick(e) {
-		if (props.disabled) {
-			e.stopPropagation();
-		}
+		if (props.disabled) e.stopPropagation();
+		if (props.onClick && typeof props.onClick == 'function') props.onClick();
 	}
 
 	return (
 		<li className="menu__item" onClick={handleMenuItemClick}>
-			{props.children}</li>
+			{props.children}
+		</li>
 	);
 };
 

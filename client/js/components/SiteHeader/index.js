@@ -43,7 +43,11 @@ class SiteHeader extends React.Component {
 							{this.renderNavItems()}
 						</ul>
 					</nav>
-					<UserBox className="site-header__user-box" {...this.props.userInfo} />
+					<UserBox 
+						{...this.props.userInfo}
+						className="site-header__user-box" 
+						onUserLogoutClick={this.props.onUserLogoutClick} 
+					/>
 				</div>
 			</header>
 		);

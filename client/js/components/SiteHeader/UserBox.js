@@ -30,7 +30,7 @@ class UserBox extends React.Component {
 						<MenuItem><Link to={`/profile/${this.props.username}`}>Your profile</Link></MenuItem>
 						<MenuItem><Link to="/settings">Settings</Link></MenuItem>
 						<Divider></Divider>
-						<MenuItem>Log out</MenuItem>
+						<MenuItem onClick={this.props.onUserLogoutClick}>Log out</MenuItem>
 					</MenuDropdown>
 				</Menu>
 			</div>

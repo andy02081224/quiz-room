@@ -7,20 +7,40 @@ import {
 	checkUserStatus as checkUserStatusRequest 
 } from '../utils/apiManager.js';
 
+/* Async Actions */
 export const LOGIN_USER = createAsyncActionObject('LOGIN_USER');
 export const CHECK_USER_STATUS = createAsyncActionObject('CHECK_USER_STATUS');
+export const LOGOUT_USER = createAsyncActionObject('LOGOUT_USER');
+
+/* Sync Actions */
 
 function actionLoginUser(credentials) {
 	return {
 		type: LOGIN_USER.NAME,
-		payload: loginUserRequest(credentials)
+		payload: loginUserRequest(credentials),
+		meta: {
+			reducer: 'loginUser'
+		}
 	};
 }
 
 function actionCheckUserStatus() {
 	return {
 		type: CHECK_USER_STATUS.NAME,
-		payload: checkUserStatusRequest()
+		payload: checkUserStatusRequest(),
+		meta: {
+			reducer: 'checkUserStatus'
+		}
+	};
+}
+
+function actionLogoutUser() {
+	return {
+		type: LOGOUT_USER.NAME,
+		payload: Promise.resolve(true),
+		meta: {
+			reducer: 'logoutUser'
+		}
 	};
 }
 
@@ -45,7 +65,18 @@ export function loginUser(credentials) {
 
 export function checkUserStatus() {
 	return (dispatch) => {
-		console.log('dispatch actionCheckUserStatus');
 		return dispatch(actionCheckUserStatus());
+	};
+}
+
+export function logoutUser() {
+	return (dispatch) => {
+		return dispatch(actionLogoutUser())
+			.then((response) => {
+				if (response) {
+					localStorage.removeItem('token');
+					browserHistory.push('/');
+				}
+			});
 	};
 }
