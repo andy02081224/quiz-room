@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 
 const userSelector = function(state) {
 	return state.user;
-}
+};
 
 const userProfileSelector = createSelector(userSelector, (user) => {
 	return {

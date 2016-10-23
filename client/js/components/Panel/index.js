@@ -5,7 +5,7 @@ const Panel = function(props) {
 	let header = props.header 
 		? <div className="panel__header">{props.header}</div> 
 		: null;
-	let style = { textAlign: props.textAlign }
+	let style = { textAlign: props.textAlign };
 
 	return (
 		<div className="panel" style={style}>
