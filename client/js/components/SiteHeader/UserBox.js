@@ -23,7 +23,11 @@ class UserBox extends React.Component {
 		return (
 			<div className={this.props.className}>
 				<Menu>
-					<MenuTrigger>{this.props.username}</MenuTrigger>
+					<MenuTrigger>
+						<div className={`${this.props.className}-avatar`}>
+							<img src={`/img/user/${this.props.id}/64.jpg`} alt="user avatar"/>
+						</div>
+					</MenuTrigger>
 					<MenuDropdown>
 						<MenuItem disabled={true}>{this.props.username} (@{this.props.username})</MenuItem>
 						<Divider></Divider>
