@@ -1,9 +1,14 @@
+const fs = require('fs');
+const path = require('path');
 const bcrypt = require('bcrypt');
+const ncp = require('ncp').ncp;
 const router = require('express').Router();
 const jwt = require('jsonwebtoken');
 const uuid = require('node-uuid');
 const UserModel = require('../models/user.js');
 const API_ERR_MSG = require('../utils/generalAPIErrorMessage.js')
+
+const DIR_USER_IMG = './client/img/user'
 
 const API_USER_REGISTER = '/user/register';
 const API_USER_LOGIN = '/user/login';
@@ -41,13 +46,26 @@ module.exports = function(socket) {
 					username: username,
 					password: hash,
 					email: email,
-					name: name
+					name: name || username
 				};
 				
 				let newUser = new UserModel(doc);
 
 				newUser.save((err, data) => {
 					if (err) return next({ statusCode: 500 });
+
+					let defaultImgPath = path.resolve(DIR_USER_IMG, 'default');
+					let newDirPath = path.resolve(DIR_USER_IMG, data.id);	
+
+					if (!fs.existsSync(newDirPath)) {
+						fs.mkdirSync(newDirPath);
+
+						// Copy all default images to new user directory
+						ncp(defaultImgPath, newDirPath, (err) => {
+							if (err) console.log(err);
+						});
+					}
+
 					res.json(data);
 				});
 			});
@@ -87,6 +105,7 @@ module.exports = function(socket) {
 					let userData = {
 						id: foundUser.id,
 						username: foundUser.username,
+						name: foundUser.name,
 						image: foundUser.image
 					};
 
