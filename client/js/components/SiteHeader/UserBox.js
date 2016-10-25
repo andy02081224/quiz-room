@@ -29,7 +29,7 @@ class UserBox extends React.Component {
 						</div>
 					</MenuTrigger>
 					<MenuDropdown>
-						<MenuItem disabled={true}>{this.props.username} (@{this.props.username})</MenuItem>
+						<MenuItem disabled={true}>{this.props.name} (@{this.props.username})</MenuItem>
 						<Divider></Divider>
 						<MenuItem><Link to={`/profile/${this.props.username}`}>Your profile</Link></MenuItem>
 						<MenuItem><Link to="/settings">Settings</Link></MenuItem>

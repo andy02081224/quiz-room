@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import '../utils/validation.js';
 import { logoutUser } from '../actions/user';
+import { userProfileSelector } from './commonSelectors';
 
 /* Components */
 import SiteHeader from '../components/SiteHeader';
@@ -33,14 +34,9 @@ const App = function(props) {
 	);
 };
 
-const userInfoSelector = (state) => {
-	let { id, username, image }  = state.user;
-	return { id, username, image };
-};
-
 const mapStateToProps = function(state) {
 	return {
-		userInfo: userInfoSelector(state) 
+		userInfo: userProfileSelector(state) 
 	};
 };
 

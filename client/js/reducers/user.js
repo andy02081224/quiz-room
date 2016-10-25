@@ -12,6 +12,7 @@ const initialState = {
 	isLoggedIn: false,
 	id: '',
 	username: '',
+	name: '',
 	image: ''
 };
 
@@ -48,7 +49,7 @@ function loginUser(state, action) {
 				isLoggedIn: true,
 				id: action.payload.id,
 				username: action.payload.username,
-				image: action.payload.image
+				name: action.payload.name
 			});
 		case REJECTED:
 			return Object.assign({}, state, {
@@ -71,8 +72,10 @@ function checkUserStatus(state, action) {
 		case FULFILLED:
 			return Object.assign({}, state, {
 				ui: { isProcessing: false },
+				isLoggedIn: true,
 				id: action.payload.id,
-				username: action.payload.username
+				username: action.payload.username,
+				name: action.payload.name
 			});
 		case REJECTED:
 			return Object.assign({}, state, {
