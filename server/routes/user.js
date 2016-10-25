@@ -169,7 +169,8 @@ module.exports = function(socket) {
 
 			res.json({
 				id: decoded.id,
-				username: decoded.username
+				username: decoded.username,
+				name: decoded.name
 			});
 		});
 	});
