@@ -1,13 +1,10 @@
 import React from 'react';
 import Panel from '../../components/Panel';
+import UserProfile from '../../components/UserProfile';
 
 class UserProfilePage extends React.Component {
 	constructor(props) {
 		super(props);
-	}
-
-	componentDidMount() {
-		console.log('userProfile:', this.props.userProfile);
 	}
 
 	render() {
@@ -17,7 +14,7 @@ class UserProfilePage extends React.Component {
 					<div className="row">
 						<div className="col-md-12">
 							<Panel>
-								{this.props.userProfile.username}
+								<UserProfile profile={this.props.userProfile} />
 							</Panel>
 						</div>
 					</div>

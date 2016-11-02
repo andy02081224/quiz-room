@@ -1,0 +1,67 @@
+.user-profile {
+	text-align: left;
+	font-size: 1.5rem;
+	position: relative;
+	height: 200px;
+
+	p, div {
+		height: 100%;
+		margin: 0;
+	}
+
+	section {
+		width: 100%;
+		padding: 10px 0;
+	}
+
+	&__basic {
+		position: absolute;
+		top: 0;
+	}
+
+	&__basic p {
+		margin-bottom: 10px;
+	}
+
+	&__name {
+		font-weight: 800;
+		font-size: 1.5em;
+	}
+
+	&__username {
+		color: #7e7e7e;
+	}
+
+	&__account-settings a {
+		display: inline-block;
+		padding: 5px;
+	}
+
+	&__account-settings a:hover {
+		border-radius: 5px;
+		box-shadow: 0 0 1px 1px #a3a3a3;
+	}
+
+	&__account-settings img {
+		height: 50px;
+	}
+
+	&__social {
+		position: absolute;
+		bottom: 0;
+	}
+
+	&__social p {
+		display: inline-block;
+	}
+
+	&__social p:not(:last-child) {
+		border-right: 1px solid #dbdbdb;
+	}
+
+	&__social header + p {
+		font-weight: 800;
+		font-size: 1.4em;
+		padding-top: 15px;
+	}
+}
