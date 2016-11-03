@@ -12,11 +12,11 @@ const UserProfile = function(props) {
 			<div className="container-fluid">
 				<div className="row">
 					<div className="col-md-3 col-sm-4">
-						<Dropzone onDrop={onDrop}>
-		        	<div>Image</div>
-		      	</Dropzone>
+						<div className="user-profile__avatar">
+		        	<img src={`/img/user/${props.profile.id}/256.jpg`} alt=""/>
+		      	</div>
 					</div>
-					<div className="col-md-9 col-sm-8">
+					<div className="col-md-9 col-sm-8 col-xs-12">
 						<section className="user-profile__basic">
 							<div className="row">
 								<div className="col-sm-8 col-xs-8">
@@ -30,15 +30,15 @@ const UserProfile = function(props) {
 						</section>
 						<section className="user-profile__social">
 							<div className="row">
-								<p className="col-sm-4">
+								<p className="col-xs-4">
 									<header>Followers</header>
 									<p>13</p>
 								</p>
-								<p className="col-sm-4">
+								<p className="col-xs-4">
 									<header>Followed</header>
 									<p>22</p>
 								</p>
-								<p className="col-sm-4">
+								<p className="col-xs-4">
 									<header>Starred</header>
 									<p>3</p>
 								</p>

@@ -13,13 +13,7 @@ import SiteContent from '../components/SiteContent/SiteContent.jsx';
 import '../../styles/app.scss';
 
 const App = function(props) {
-	let appNavItems = [{
-		label: 'item1',
-		link: '/'
-	}, {
-		label: 'item2',
-		link: '/'
-	}];
+	let appNavItems = [];
 
 	return (
 		<div>

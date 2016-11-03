@@ -1,3 +1,5 @@
+@import '../../../styles/helpers/breakpoints';
+
 .user-profile {
 	text-align: left;
 	font-size: 1.5rem;
@@ -12,6 +14,17 @@
 	section {
 		width: 100%;
 		padding: 10px 0;
+	}
+
+	&__avatar {
+		overflow: hidden;
+		padding: 10px 0;
+		text-align: center;
+	}
+
+	&__avatar img {
+		height: 180px;
+		border-radius: 5px;
 	}
 
 	&__basic {
@@ -63,5 +76,34 @@
 		font-weight: 800;
 		font-size: 1.4em;
 		padding-top: 15px;
+	}
+
+	@media screen and (max-width: $bp-xs-max) {
+		font-size: 1.3rem;
+		height: auto;
+
+		.container-fluid {
+			padding: 0;
+		}
+
+		&__avatar {
+			display: none;
+		}
+
+		&__account-settings img {
+			height: 30px;
+		}
+
+		&__basic {
+			position: static;
+		}
+
+		&__social {
+			position: static;
+		}
+	}
+
+	@media screen and (max-width: 400px) {
+		font-size: 1.2rem;
 	}
 }
