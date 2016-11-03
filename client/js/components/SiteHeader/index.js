@@ -34,7 +34,7 @@ class SiteHeader extends React.Component {
 	render() {
 		return (
 			<header className="site-header">
-				<div className="content-wrapper">
+				<div className="container">
 					<div className="site-header__logo">
 						<Link to="/">{this.props.siteTitle}</Link>
 					</div>
